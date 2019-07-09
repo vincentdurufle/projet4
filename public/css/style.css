@@ -1,8 +1,16 @@
+:root {
+    --main: #47526A;
+    --secondary: #5b6a89;
+}
+
 html,
 body {
     padding: 0;
     margin: 0;
     font-family: 'Raleway', sans-serif;
+    background-color: var(--main); 
+    scroll-behavior: smooth;
+    position: relative;
 }
 
 h1, h2, h3, h4 {
@@ -66,4 +74,106 @@ nav ul li a:visited {
     border-radius: 100%;
     margin: 15vh 0;
     font-size: 150%;
+}
+
+/* =================== */
+/* ===== CHAPTER ===== */
+/* =================== */
+
+.chapter-containers {
+    color: white;
+}
+.chapter {
+    color: white;
+    margin: 50px;
+    background-color: rgba(0, 0, 0, 0.342);
+    padding: 20px;
+    border-radius: 0.25rem;
+}
+.chapter p {
+    line-height: 1.25;
+}
+.chapter a:link,
+.chapter a:visited {
+    color: var(--secondary);
+}
+.title {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.title h2 {
+    margin: 0 20px;
+}
+.title span {
+    font-style: italic;
+    font-size: 80%;
+    color: var(--secondary);
+}
+
+/* ==================== */
+/* ===== COMMENTS ===== */
+/* ==================== */
+
+.comments {
+    background-color: white;
+    margin: 50px;
+    padding: 20px;
+    width: 50vw;
+    border-radius: 0.25rem;
+}
+.comments h2 {
+    margin: 0 20px;
+}
+
+.comments .title strong{
+    padding: 0 10px;
+}
+
+/* ===================== */
+/* ===== INTERFACE ===== */
+/* ===================== */
+.interface-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: calc(85vh - 42px);
+}
+
+.interface-container a:link,
+.interface-container a:visited {
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+    width: 20%;
+    background-color: white;
+    border-radius: 0.25rem;
+    margin: 10px;
+    text-align: center;
+    border: 2px solid black;
+}
+
+
+
+
+/* ================== */
+/* ===== FOOTER ===== */
+/* ================== */
+
+footer {
+    display: flex;
+    justify-content: center;
+    background-color: var(--main);
+    color: lightgray;
+    border-top: 1px solid lightgray;
+    font-size: 80%;
+    padding: 5px 0;
+    width: 100%;
+    
+}
+footer a:link,
+footer a:visited {
+    text-decoration: none;
+    color: white;
 }
