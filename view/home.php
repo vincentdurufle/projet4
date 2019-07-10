@@ -45,7 +45,7 @@
         $posts->closeCursor();
         ?>
     </section>
-    <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="/"> Connexion</a></footer>
+    <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="?action=login"> Connexion</a></footer>
 </body>
 
 </html>

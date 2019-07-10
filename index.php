@@ -1,5 +1,11 @@
 <?php
-require('./controller/controller.php');
+if(!isset($_SESSION)) {
+    session_start();
+}
+require_once('./controller/controller.php');
+require_once('./controller/userController.php');
+require_once('./controller/editController.php');
+
 
 if(isset($_GET['action'])) {
     if($_GET['action'] == 'showChapters') {
@@ -9,6 +15,22 @@ if(isset($_GET['action'])) {
             post();
         } else {
             echo 'Erreur : bullshit';
+        }
+    } elseif ($_GET['action'] == 'login') {
+        loginPage();
+    } elseif ($_GET['action'] == 'checkLogin') {
+        if(isset($_POST['submit'])) {
+            if (empty($_POST['username'] || empty($_POST['password']))) {
+                echo "Veuillez saisir un nom d'utilisateur et mot de passe";
+            } else {
+                login();
+            }
+        } 
+    } elseif ($_GET['action'] == 'addChapter') {
+        if(isset($_SESSION) && $_SESSION['username'] == 'admin') {
+            addChapterView();
+        } else {
+            echo 'some shit happened';
         }
     }
 } else {
