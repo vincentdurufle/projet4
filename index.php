@@ -32,6 +32,24 @@ if(isset($_GET['action'])) {
         } else {
             echo 'some shit happened';
         }
+    } elseif ($_GET['action'] == 'postChapter') {
+        if(isset($_POST['editor_title']) && isset($_POST['editor_content'])) {
+            addChapter();
+        } else {
+            echo 'there was a problem';
+        } 
+    } elseif ($_GET['action'] == 'showChaptersTitle') {
+        showTitles();
+    } elseif($_GET['action'] == 'updateChapter') {
+        if(isset($_GET['id']) && $_GET['id'] > 0) { 
+            showChapter();
+        }
+    } elseif($_GET['action'] == 'updateChapterData') {
+        if(!isset($_GET['id'])) {
+            echo 'no ID';
+        } else {
+            updateChapter();
+        }
     }
 } else {
     showChapters();

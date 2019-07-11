@@ -10,7 +10,7 @@
 <section class="interface-container">
 <h1>Bienvenue, <?= $_SESSION['username'] ?></h1>
     <a href="?action=addChapter">Ajouter un chapitre</a>
-    <a href="">Mettre à jour un chapitre</a>
+    <a href="?action=showChaptersTitle">Mettre à jour un chapitre</a>
     <a href="">Voir les commentaires</a>
 </section>
 

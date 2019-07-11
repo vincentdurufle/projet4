@@ -9,6 +9,12 @@ function dbConnect()
     }
 }
 
+function showChaptersTitle() {
+    $db = dbConnect();
+    $req = $db->query('SELECT id, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y à %Hh%imin%ss\') AS date_creation_fr FROM chapters ORDER BY date_creation DESC');
+    return $req;
+}
+
 function getChapters()
 {
     $db = dbConnect();

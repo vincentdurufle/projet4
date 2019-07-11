@@ -5,11 +5,11 @@ $script = '<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froa
 <?php ob_start() ?>
 
 <section class="editor-container">
-    <form action="">
+    <form action="index.php?action=postChapter" method="post">
         <label for="editor_title">Titre</label>
         <input type="text" name="editor_title">
-        <label for="editor">Contenu</label>
-        <textarea name="editor" id="editor"></textarea>
+        <label for="editor_content">Contenu</label>
+        <textarea name="editor_content" id="editor"></textarea>
         <input type="submit" value="Envoyer">
     </form>
 

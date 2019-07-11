@@ -14,7 +14,6 @@ function checkUser() {
         echo 'Mauvais identifiant ou mot de passe';
     } else {
         if ($isPasswordCorrect) {
-            session_start();
             $_SESSION['username'] = $_POST['username'];
         } else {
             header('Location: index.php?action=login&err=$err');

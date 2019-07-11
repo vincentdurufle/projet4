@@ -1,3 +1,3 @@
-if(document.URL.includes('?action=addChapter')) {
+if(document.URL.includes('?action=addChapter') || document.URL.includes('?action=updateChapter')) {
     var editor = new FroalaEditor('#editor');
 }
