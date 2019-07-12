@@ -11,4 +11,10 @@ function addChapter() {
 
 function updateChapter() {
     updateChapterData();
+    header('Location: index.php?action=showChaptersTitle');
+}
+
+function deleteChapter() {
+    deleteChapterData();
+    header('Location: index.php?action=showChaptersTitle');
 }

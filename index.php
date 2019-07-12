@@ -46,9 +46,16 @@ if(isset($_GET['action'])) {
         }
     } elseif($_GET['action'] == 'updateChapterData') {
         if(!isset($_GET['id'])) {
-            echo 'no ID';
+            echo 'Erreur';
         } else {
             updateChapter();
+            post();
+        }
+    } elseif($_GET['action'] == 'deleteChapter') {
+        if(!isset($_GET['id'])) {
+            echo 'Erreur';
+        } else {
+            deleteChapter();
         }
     }
 } else {

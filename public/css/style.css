@@ -238,6 +238,18 @@ nav ul li a:visited {
     color: white;
 }
 
+.delete:link, 
+.delete:visited {
+    color: white !important;
+    font-size: 120%;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 0 20px;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: var(--third);
+}
 
 /* ================== */
 /* ===== FOOTER ===== */
