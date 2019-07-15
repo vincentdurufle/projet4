@@ -21,6 +21,7 @@
                 </li>
                 <li><a href="./home.php">Accueil</a> </li>
                 <li><a href="/">Chapitres</a></li>
+                <li><a href="?action=loginUser">Connexion</a></li>
             </ul>
         </nav>
         <h1>Billet simple pour l'Alaska</h1>
@@ -34,7 +35,7 @@
             <div class="chapter">
                 <div class="title">
                     <h2> <?= htmlspecialchars($data['title']) ?></h2>
-                    <span>le <?= $data['date_creation_fr'] ?> </span>
+                    <span><?= get_time_ago(strtotime($data['date_creation'])) ?> </span>
                 </div>
                 <p> <?= $data['content'] ?> </p>
                 <a href="/index.php?action=post&id=<?= $data['id'] ?>">Commentaires</a>
@@ -45,7 +46,7 @@
         $posts->closeCursor();
         ?>
     </section>
-    <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="?action=login"> Connexion</a></footer>
+    <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="?action=loginAdmin">&#160; Admin</a></footer>
 </body>
 
 </html>

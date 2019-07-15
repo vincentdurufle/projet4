@@ -26,7 +26,7 @@
         <div class="chapter">
             <div class="title">
                 <h2> <?= htmlspecialchars($chapter['title']) ?></h2>
-                <span>le <?= $chapter['creation_date_fr'] ?> </span>
+                <span><?= get_time_ago(strtotime($chapter['date_creation']))  ?> </span>
             </div>
             <p> <?= $chapter['content'] ?> </p>
         </div>
@@ -37,13 +37,17 @@
                 ?>
                 <p class='title'>
                     <strong><?= htmlspecialchars($comment['name']) ?></strong>
-                    <span> le <?= $comment['comment_date_fr'] ?></span>
+                    <span><?= get_time_ago(strtotime($comment['date_creation']))  ?></span>
                 </p>
                 <p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
                 <?php
                 }
                 $comments->closeCursor();
+                if(!$comment) {
+                    echo '<p>Il n\'y a pas de commentaire, soyez le premier !</p>';
+                }
                 ?>
+                <a href="?action=addComment&id=<?= $_GET['id']?>">Ajouter un commentaire</a>
             </div>
         </section>
         <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="/"> Connexion</a></footer>

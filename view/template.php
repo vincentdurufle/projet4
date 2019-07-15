@@ -24,10 +24,11 @@
             </li>
             <li><a href="./index.php">Accueil</a> </li>
             <li><a href="/">Chapitres</a></li>
+            <li><a href="?action=loginUser">Connexion</a></li>
         </ul>
     </nav>
     <?= $content ?>
-    <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="?action=login"> Connexion</a></footer>
+    <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="?action=loginAdmin"> Connexion</a></footer>
     
     <?php if (isset($script)) {
        echo $script;

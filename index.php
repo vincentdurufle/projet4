@@ -16,8 +16,8 @@ if(isset($_GET['action'])) {
         } else {
             echo 'Erreur : bullshit';
         }
-    } elseif ($_GET['action'] == 'login') {
-        loginPage();
+    } elseif ($_GET['action'] == 'loginAdmin') {
+        loginAdminPage();
     } elseif ($_GET['action'] == 'checkLogin') {
         if(isset($_POST['submit'])) {
             if (empty($_POST['username'] || empty($_POST['password']))) {
@@ -57,6 +57,14 @@ if(isset($_GET['action'])) {
         } else {
             deleteChapter();
         }
+    } elseif($_GET['action'] == 'createUser') {
+        if(isset($_POST['username']) && !empty($_POST['username']) AND isset($_POST['email']) && !empty($_POST['email'] && isset($_POST['password']) && !empty($_POST['password']))){
+            createUser();
+        }
+    } elseif($_GET['action'] == 'verify') {
+        echo 'ok';
+    } elseif($_GET['action'] == 'loginUser') {
+        loginUserPage();
     }
 } else {
     showChapters();
