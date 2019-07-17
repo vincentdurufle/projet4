@@ -6,7 +6,11 @@ function loginAdminPage() {
 }
 
 
-function login() {
+function loginAdmin() {
+    checkUser();
+    require('./view/adminInterface.php');
+}
+function loginUser() {
     checkUser();
     require('./view/userInterface.php');
 }

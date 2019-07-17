@@ -18,12 +18,12 @@ if(isset($_GET['action'])) {
         }
     } elseif ($_GET['action'] == 'loginAdmin') {
         loginAdminPage();
-    } elseif ($_GET['action'] == 'checkLogin') {
+    } elseif ($_GET['action'] == 'checkLoginAdmin') {
         if(isset($_POST['submit'])) {
             if (empty($_POST['username'] || empty($_POST['password']))) {
                 echo "Veuillez saisir un nom d'utilisateur et mot de passe";
             } else {
-                login();
+                loginAdmin();
             }
         } 
     } elseif ($_GET['action'] == 'addChapter') {
@@ -65,6 +65,14 @@ if(isset($_GET['action'])) {
         echo 'ok';
     } elseif($_GET['action'] == 'loginUser') {
         loginUserPage();
+    } elseif($_GET['action'] == 'checkLoginUser') {
+        if(isset($_POST['submit'])) {
+            if (empty($_POST['username'] || empty($_POST['password']))) {
+                echo "Veuillez saisir un nom d'utilisateur et mot de passe";
+            } else {
+                loginUser();
+            }
+        } 
     }
 } else {
     showChapters();

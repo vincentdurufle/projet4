@@ -22,7 +22,7 @@
     </form>
 
 
-    <form action="?action=loginUser" method="post">
+    <form action="?action=checkLoginUser" method="post">
         <h1>S'identifier</h1>
         <label for="username">Nom d'utilisateur</label>
         <input type="text" name="username">
