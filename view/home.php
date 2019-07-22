@@ -30,7 +30,7 @@
     </section>
     <section class="chapters-container" id="chapter">
         <?php
-        while ($data = $posts->fetch()) {
+        while ($data = $req->fetch()) {
             ?>
             <div class="chapter">
                 <div class="title">
@@ -43,7 +43,7 @@
             </div>
         <?php
         }
-        $posts->closeCursor();
+        $req->closeCursor();
         ?>
     </section>
     <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="?action=loginAdmin">&#160; Admin</a></footer>

@@ -7,8 +7,6 @@ function addChapterData()
     $chapter->execute(array($_POST['editor_title'], $_POST['editor_content']));
 }
 
-
-
 function updateChapterData()
 {
     $db = dbConnect();

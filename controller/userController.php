@@ -1,13 +1,16 @@
 <?php 
-require_once('./model/login.php');
+function autoload($class) {
+    require './model/' .$class. '.php';
+}
+spl_autoload_register('autoload');
 
 function loginAdminPage() {
     require('./view/loginAdminView.php');
 }
 
-
 function loginAdmin() {
-    checkUser();
+    $admin = new UserManager;
+    $req = $admin->checkUser();
     require('./view/adminInterface.php');
 }
 function loginUser() {

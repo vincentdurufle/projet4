@@ -9,7 +9,7 @@
         echo '<div class="error-container"><p>' . $err . '</p></div>';
     }
 ?>
-    <form action="?action=checkLogin" method="post">
+    <form action="?action=checkLoginAdmin" method="post">
         <label for="username">Nom d'utilisateur</label>
         <input type="text" name="username">
         <label for="password">Mot de passe</label>

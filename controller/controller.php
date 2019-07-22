@@ -1,9 +1,11 @@
 <?php 
 require_once('./model/model.php');
+require_once('./model/chapter.php');
+require_once('./model/chapterManager.php');
 
 function showChapters() {
-    $posts = getChapters();
-    
+    $chapter = new ChapterManager();
+    $req = $chapter->get();
     require('./view/home.php');
 }
 
