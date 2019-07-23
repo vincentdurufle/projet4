@@ -26,7 +26,7 @@
         </nav>
         <h1>Billet simple pour l'Alaska</h1>
         <h4>Le prochain livre de Jean Forteroche</h4>
-        <a href="#chapter"><i class="far fa-file-alt"></i></a>
+        <a href="#chapter"><i class="fas fa-book"></i></a>
     </section>
     <section class="chapters-container" id="chapter">
         <?php

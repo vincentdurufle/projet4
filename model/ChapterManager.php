@@ -1,19 +1,57 @@
 <?php
 require_once('./model/Manager.php');
 
-class ChapterManager extends Manager {
+class ChapterManager extends Manager
+{
 
-    public function get() {
+    public function get()
+    {
         $db = dbConnect();
         $chapters = $db->query('SELECT id, title, content, date_creation FROM chapters ORDER BY date_creation DESC LIMIT 0, 5');
         return $chapters;
     }
 
-    public function add(Chapter $chapter) {
+    public function add(Chapter $chapter)
+    {
         $db = dbConnect();
-        $chapter = $db->prepare('INSERT INTO chapters(title, content, date_creation) VALUES (?, ?, NOW())');
-        $chapter->execute(array($chapter['title'], $chapter['content']));
+        $req = $db->prepare('INSERT INTO chapters(title, content, date_creation) VALUES (:title, :content, NOW())');
+
+        $req->bindValue(':title', $chapter->title());
+        $req->bindValue(':content', $chapter->content());
+
+        $req->execute();
     }
 
-    
+    public function update(Chapter $chapter)
+    {
+        $db = dbConnect();
+        $req = $db->prepare('UPDATE chapters SET title = :title, content = :content WHERE id = :id ');
+
+        $req->bindValue(':title', $chapter->title());
+        $req->bindValue(':content', $chapter->content());
+        $req->bindValue(':id', $chapter->id());
+
+        $req->execute();
+    }
+
+    public function delete(Chapter $chapter)
+    {
+        $db = dbConnect();
+        $req = $db->prepare('SELECT TRUE FROM comments WHERE chapter_id = :id');
+        $req->bindValue(':id', $chapter->id());
+        $req->execute();
+
+        echo 'ok';
+
+        $exists = $req->fetch();
+        if ($exists) {
+            $deleteChapter = $db->prepare('DELETE chapters, comments FROM chapters INNER JOIN comments ON comments.chapter_id = chapters.id WHERE chapters.id = :id');
+            $deleteChapter->bindValue(':id', $chapter->id());
+            $deleteChapter->execute();
+        } else {
+            $deleteChapter = $db->prepare('DELETE FROM chapters WHERE id = :id');
+            $deleteChapter->bindValue(':id', $chapter->id());
+            $deleteChapter->execute();
+        }
+    }
 }
