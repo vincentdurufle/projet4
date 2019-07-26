@@ -1,6 +1,7 @@
 <?php
     if(!isset($_SESSION['username'])) {
-        header('Location: index.php?login');
+        header('Location: index.php?loginUser');
+        echo $_SESSION;
     }
 ?>
 

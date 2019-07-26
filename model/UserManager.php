@@ -4,28 +4,26 @@ require_once('./model/Manager.php');
 
 class UserManager extends Manager
 {
-
     public function checkUser()
     {
         $db = dbConnect();
-        $req = $db->prepare('SELECT username, password FROM users WHERE username = :username');
-        $req->execute(array(
-            'username' => $_POST['username']
-        ));
+        $req = $db->prepare('SELECT username, password FROM users WHERE username = :username AND active = "1"');
+        $req->execute(array(':username' => $_POST['username']));
+
         $result = $req->fetch();
 
         $isPasswordCorrect = password_verify($_POST['password'], $result['password']);
 
-        if (!$result) {
+
+        if (!$result && $_POST['username'] == 'admin') {
             header('Location: index.php?action=loginAdmin&err=$err');
-            echo 'Mauvais identifiant ou mot de passe';
+        } elseif (!$result && $_POST['username']  != 'admin') {
+            header('Location: index.php?action=loginUser&err=$err');
         } else {
             if ($isPasswordCorrect) {
                 $_SESSION['username'] = $_POST['username'];
-            } elseif ($_POST['username'] != 'admin') {
+            } elseif (!$isPasswordCorrect) {
                 header('Location: index.php?action=loginUser&err=$err');
-            } else {
-                header('Location: index.php?action=loginAdmin&err=$err');
             }
         }
     }
@@ -47,35 +45,26 @@ class UserManager extends Manager
     Merci de vous être inscrit au site de Jean Forteroche.
     Veuillez maintenant valider votre addresse mail pour utiliser votre compte 
     en cliquant sur ce lien : 
-    http://localhost/?action=verify?email=' . $user->email() . '&token=' . $user->token() . '
+    http://localhost/?action=verify&email=' . $user->email() . '&token=' . $user->token() . '
     ';
         $headers = 'From:noreply@projet4.vincentdurufle.com' . "\r\n";
         $headers .= 'Content-Type: text/plain; charset="utf-8"' . " ";
         mail($to, $subject, $message, $headers);
 
         $req->execute();
-        // $transport = (new Swift_SmtpTransport('mail.vincentdurufle.com', 26))
-        //     ->setUsername('projet4@vincentdurufle.com')
-        //     ->setPassword('vincent(durufle)12');
+    }
 
-        // // Create the Mailer using your created Transport
-        // $mailer = new Swift_Mailer($transport);
+    public function activateUser()
+    {
+        $db = dbConnect();
 
-
-        // // Create a message
-        // $message = (new Swift_Message('Vérification d\'email'))
-        //     ->setFrom('projet4@vincentdurufle.com')
-        //     ->setTo($user->email())
-        //     ->setBody('
-        //     Merci de vous être inscrit au site de Jean Forteroche.
-        //     Veuillez maintenant valider votre addresse mail pour utiliser votre compte 
-        //     en cliquant sur ce lien : 
-        //     http://localhost/?action=verify?email=' . $user->email() . '&token=' . $user->token() . '
-        //     ');
-
-        // // Send the message
-        // $result = $mailer->send($message);
-
-
+        $req = $db->prepare('SELECT email, token, active FROM users WHERE email = ? AND token = ? AND active = 0');
+        $res = $req->execute(array($_GET['email'], $_GET['token']));
+        if ($res) {
+            $update = $db->prepare('UPDATE users SET active = 1 WHERE email = ? AND token = ?');
+            $update->execute(array($_GET['email'], $_GET['token']));
+        } else {
+            header('Location: index.php?action=loginUser&err=$err');
+        }
     }
 }

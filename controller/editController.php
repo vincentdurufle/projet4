@@ -31,6 +31,5 @@ function deleteChapter() {
 
     $deleteChapter = new ChapterManager();
     $deleteChapter->delete($req);
-
     
 }

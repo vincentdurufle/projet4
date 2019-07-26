@@ -62,7 +62,7 @@ if(isset($_GET['action'])) {
             createUser();
         }
     } elseif($_GET['action'] == 'verify') {
-        echo 'ok';
+        verifyUser();
     } elseif($_GET['action'] == 'loginUser') {
         loginUserPage();
     } elseif($_GET['action'] == 'checkLoginUser') {
@@ -73,6 +73,8 @@ if(isset($_GET['action'])) {
                 loginUser();
             }
         } 
+    } elseif($_GET['action'] == 'disconnect') {
+        disconnect();
     }
 } else {
     showChapters();

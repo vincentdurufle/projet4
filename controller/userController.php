@@ -27,6 +27,10 @@ function loginUserPage() {
     require('./view/loginUserView.php');
 }
 
+function disconnect() {
+    session_destroy();
+}
+
 function createUser() {
     $user = new User([
         'username' => $_POST['username'],
@@ -36,4 +40,9 @@ function createUser() {
     ]);
     $req = new UserManager();
     $req->createUser($user);
+}
+
+function verifyUser() {
+    $user = new UserManager();
+    $user->activateUser();
 }

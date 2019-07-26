@@ -1,5 +1,5 @@
 <?php
-    $err = 'Probleme';
+    $err = 'Mauvais identifiant ou mot de passe';
 ?>
 
 <?php ob_start() ?>
