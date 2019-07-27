@@ -1,22 +1,24 @@
 <?php 
-require_once('./model/model.php');
-require_once('./model/chapter.php');
-require_once('./model/chapterManager.php');
 
 function showChapters() {
     $chapter = new ChapterManager();
-    $req = $chapter->get();
+    $req = $chapter->getChapters();
+    
     require('./view/home.php');
 }
 
 function showChapter() {
-    $chapter = getChapter($_GET['id']);
+    $chapter =  new ChapterManager();
+    
     require('./view/updateChapterView.php');
 }
 
 function post() {
-    $chapter = getChapter($_GET['id']);
-    $comments = getComments($_GET['id']);
+    $chapter = new ChapterManager();
+    $post = $chapter->getChapter();
+
+    $req = new CommentManager();
+    $comments = $req->getComments();
 
     require('./view/chapterView.php');
 }

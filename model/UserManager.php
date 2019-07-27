@@ -6,7 +6,7 @@ class UserManager extends Manager
 {
     public function checkUser()
     {
-        $db = dbConnect();
+        $db = $this->dbConnect();
         $req = $db->prepare('SELECT username, password FROM users WHERE username = :username AND active = "1"');
         $req->execute(array(':username' => $_POST['username']));
 
@@ -30,7 +30,7 @@ class UserManager extends Manager
 
     public function createUser(User $user)
     {
-        $db = dbConnect();
+        $db = $this->dbConnect();
 
         $req = $db->prepare('INSERT INTO users (username, password, email, token) VALUES(:username, :password, :email, :token)');
         $req->bindValue(':username', $user->username());
@@ -56,7 +56,7 @@ class UserManager extends Manager
 
     public function activateUser()
     {
-        $db = dbConnect();
+        $db = $this->dbConnect();
 
         $req = $db->prepare('SELECT email, token, active FROM users WHERE email = ? AND token = ? AND active = 0');
         $res = $req->execute(array($_GET['email'], $_GET['token']));

@@ -3,17 +3,26 @@ require_once('./model/Manager.php');
 
 class ChapterManager extends Manager
 {
-
-    public function get()
+    public function getChapters()
     {
-        $db = dbConnect();
+        $db = $this->dbConnect();
         $chapters = $db->query('SELECT id, title, content, date_creation FROM chapters ORDER BY date_creation DESC LIMIT 0, 5');
         return $chapters;
     }
 
+    public function getChapter()
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT id, title, content, date_creation FROM chapters WHERE id = :id');
+        $req->execute(array(':id' => $_GET['id']));
+        $post = $req->fetch();
+
+        return $post;
+    }
+
     public function add(Chapter $chapter)
     {
-        $db = dbConnect();
+        $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO chapters(title, content, date_creation) VALUES (:title, :content, NOW())');
 
         $req->bindValue(':title', $chapter->title());
@@ -24,7 +33,7 @@ class ChapterManager extends Manager
 
     public function update(Chapter $chapter)
     {
-        $db = dbConnect();
+        $db = $this->dbConnect();
         $req = $db->prepare('UPDATE chapters SET title = :title, content = :content WHERE id = :id ');
 
         $req->bindValue(':title', $chapter->title());
@@ -36,7 +45,7 @@ class ChapterManager extends Manager
 
     public function delete(Chapter $chapter)
     {
-        $db = dbConnect();
+        $db = $this->dbConnect();
         $req = $db->prepare('SELECT TRUE FROM comments WHERE chapter_id = :id');
         $req->bindValue(':id', $chapter->id());
         $req->execute();

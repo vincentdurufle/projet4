@@ -35,7 +35,7 @@
             <div class="chapter">
                 <div class="title">
                     <h2> <?= htmlspecialchars($data['title']) ?></h2>
-                    <span><?= get_time_ago(strtotime($data['date_creation'])) ?> </span>
+                    <span><?= $chapter->get_time_ago(strtotime($data['date_creation'])) ?> </span>
                 </div>
                 <p> <?= $data['content'] ?> </p>
                 <a href="/index.php?action=post&id=<?= $data['id'] ?>">Commentaires</a>

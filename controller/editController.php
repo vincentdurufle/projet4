@@ -33,3 +33,7 @@ function deleteChapter() {
     $deleteChapter->delete($req);
     
 }
+
+function addCommentPage() {
+    require('./view/addCommentView.php');
+}

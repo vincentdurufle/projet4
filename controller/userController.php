@@ -9,7 +9,11 @@ function autoload($class) {
 spl_autoload_register('autoload');
 
 function loginAdminPage() {
-    require('./view/loginAdminView.php');
+    if(isset($_SESSION['username']) && $_SESSION['username'] == 'admin') {
+        require('./view/adminInterface.php');
+    } else {
+        require('./view/loginAdminView.php');
+    }
 }
 
 function loginAdmin() {
@@ -24,11 +28,17 @@ function loginUser() {
 }
 
 function loginUserPage() {
-    require('./view/loginUserView.php');
+    if(!isset($_SESSION['username'])) {
+        require('./view/loginUserView.php');
+    } else {
+        require('./view/userInterface.php');
+    }
+
 }
 
 function disconnect() {
     session_destroy();
+    header('Location: index.php');
 }
 
 function createUser() {

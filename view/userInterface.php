@@ -12,6 +12,7 @@
 <h1>Bienvenue, <?= $_SESSION['username'] ?></h1>
     <a href="?action=addProfilePicture">Ajouter une photo de profil</a>
     <a href="">Voir ses commentaires</a>
+    <a href="?action=disconnect">Déconnexion</a>
 </section>
 
 

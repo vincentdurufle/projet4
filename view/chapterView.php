@@ -25,10 +25,10 @@
     <section class="chapters-container" id="chapter">
         <div class="chapter">
             <div class="title">
-                <h2> <?= htmlspecialchars($chapter['title']) ?></h2>
-                <span><?= get_time_ago(strtotime($chapter['date_creation']))  ?> </span>
+                <h2> <?= htmlspecialchars($post['title']) ?></h2>
+                <span><?= $chapter->get_time_ago(strtotime($post['date_creation']))  ?> </span>
             </div>
-            <p> <?= $chapter['content'] ?> </p>
+            <p> <?= $post['content'] ?> </p>
         </div>
         <div class="comments">
             <h2>Commentaires</h2>
@@ -37,7 +37,7 @@
                 ?>
                 <p class='title'>
                     <strong><?= htmlspecialchars($comment['name']) ?></strong>
-                    <span><?= get_time_ago(strtotime($comment['date_creation']))  ?></span>
+                    <span><?= $comment->get_time_ago(strtotime($comment['date_creation']))  ?></span>
                 </p>
                 <p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
                 <?php
