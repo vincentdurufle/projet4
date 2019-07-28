@@ -6,7 +6,7 @@ class ChapterManager extends Manager
     public function getChapters()
     {
         $db = $this->dbConnect();
-        $chapters = $db->query('SELECT id, title, content, date_creation FROM chapters ORDER BY date_creation DESC LIMIT 0, 5');
+        $chapters = $db->query('SELECT id, title, content, date_creation FROM chapters ORDER BY date_creation DESC');
         return $chapters;
     }
 

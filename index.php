@@ -41,7 +41,7 @@ if (isset($_GET['action'])) {
     } elseif ($_GET['action'] == 'showChaptersTitle') {
         showTitles();
     } elseif ($_GET['action'] == 'updateChapter') {
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
+        if (isset($_GET['id']) && $_GET['id'] > 0 ) {
             showChapter();
         }
     } elseif ($_GET['action'] == 'updateChapterData') {
@@ -81,6 +81,16 @@ if (isset($_GET['action'])) {
         }else {
             addCommentPage();
         }
+    } elseif ($_GET['action'] == 'addCommentData') {
+        addComment();
+    } elseif ($_GET['action'] == 'moderateComments') {
+        showComments();
+    } elseif ($_GET['action'] == 'deleteComment') {
+        deleteComment();
+    } elseif ($_GET['action'] == 'addProfilePicture') {
+        addImagePage();
+    } elseif($_GET['action'] == 'uploadImg') {
+        addImage();
     }
 } else {
     showChapters();

@@ -8,9 +8,17 @@ function showChapters() {
 }
 
 function showChapter() {
-    $chapter =  new ChapterManager();
+    $req =  new ChapterManager();
+    $chapter = $req->getChapter();
     
     require('./view/updateChapterView.php');
+}
+
+function showTitles() {
+    $req = new ChapterManager();
+    $chapters = $req->getChapters();
+
+    require('./view/showChaptersTitleView.php');
 }
 
 function post() {
@@ -23,8 +31,14 @@ function post() {
     require('./view/chapterView.php');
 }
 
-function showTitles() {
-    $req = showChaptersTitle();
+function showComments() {
+    $req = new CommentManager();
+    if($_SESSION['username'] == 'admin') {
+        $comments = $req->getCommentsAdmin();
+    } else {
+        $comments = $req->getCommentsUser();
+    }
 
-    require('./view/showChaptersTitleView.php');
+    require('./view/commentsView.php');
 }
+

@@ -136,6 +136,10 @@ nav ul li a:visited {
     margin: 0 20px;
 }
 
+.comments p {
+    margin: 15px 0 0 0;
+}
+
 .comments .title strong{
     padding: 0 10px;
 }
@@ -149,7 +153,24 @@ nav ul li a:visited {
 
 .comments a:hover {
     border-bottom: 1px solid var(--third);
-    
+}
+.comment-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 15px;
+}
+.comment-content p {
+    margin: 5px;
+}
+.comment-content a:link,
+.comment-content a:visited {
+    color: var(--secondary);
+    font-size: 80%;
+}
+.comment-content a:hover {
+    border: none;
 }
 
 /* ===================== */
@@ -174,6 +195,11 @@ nav ul li a:visited {
     margin: 10px;
     text-align: center;
     border: 2px solid black;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    width: 80px;
 }
 
 /* ================== */

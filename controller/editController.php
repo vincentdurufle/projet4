@@ -34,6 +34,28 @@ function deleteChapter() {
     
 }
 
+function addComment() {
+    $req = new Comment([
+        'chapter_id'=> $_GET['id'],
+        'name'=> $_SESSION['username'],
+        'content'=> $_POST['editor_content']
+    ]);
+    $comment = new CommentManager();
+    $comment->add($req);
+    header('Location: index.php?action=post&id='.$_GET['id'].'');
+}
+
 function addCommentPage() {
     require('./view/addCommentView.php');
+}
+
+function deleteComment() {
+    $req = new CommentManager();
+    $req->delete();
+    header('Location: index.php?action=moderateComments');
+}
+
+function reportComment() {
+    $report = new CommentManager();
+    $report->report();
 }

@@ -56,3 +56,13 @@ function verifyUser() {
     $user = new UserManager();
     $user->activateUser();
 }
+
+function addImagePage() {
+    require('./view/addImageView.php');
+}
+
+function addImage() {
+    $img = new UserManager();
+    $img->addImage();
+    $img->userImgName();
+}

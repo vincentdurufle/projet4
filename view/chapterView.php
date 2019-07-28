@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -37,16 +37,19 @@
                 ?>
                 <p class='title'>
                     <strong><?= htmlspecialchars($comment['name']) ?></strong>
-                    <span><?= $comment->get_time_ago(strtotime($comment['date_creation']))  ?></span>
+                    <span><?= $chapter->get_time_ago(strtotime($comment['date_creation']))  ?></span>
                 </p>
-                <p><?= nl2br(htmlspecialchars($comment['content'])) ?></p>
+                <div class="comment-content">
+                    <?= nl2br($comment['content']) ?>
+                    <a href="?action=reportComment&id<?= $comment['id'] ?>">Signaler</a>
+                </div>
                 <?php
-                }
-                $comments->closeCursor();
                 if(!$comment) {
                     echo '<p>Il n\'y a pas de commentaire, soyez le premier !</p>';
                 }
-                ?>
+                }
+                $comments->closeCursor();
+                        ?>
                 <a href="?action=addComment&id=<?= $_GET['id']?>">Ajouter un commentaire</a>
             </div>
         </section>
