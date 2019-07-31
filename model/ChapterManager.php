@@ -29,6 +29,7 @@ class ChapterManager extends Manager
         $req->bindValue(':content', $chapter->content());
 
         $req->execute();
+        header('Location: /admin');
     }
 
     public function update(Chapter $chapter)
@@ -50,8 +51,6 @@ class ChapterManager extends Manager
         $req->bindValue(':id', $chapter->id());
         $req->execute();
 
-        echo 'ok';
-
         $exists = $req->fetch();
         if ($exists) {
             $deleteChapter = $db->prepare('DELETE chapters, comments FROM chapters INNER JOIN comments ON comments.chapter_id = chapters.id WHERE chapters.id = :id');
@@ -62,5 +61,6 @@ class ChapterManager extends Manager
             $deleteChapter->bindValue(':id', $chapter->id());
             $deleteChapter->execute();
         }
+        header('Location: /updateChapter');
     }
 }

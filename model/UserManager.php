@@ -18,15 +18,15 @@ class UserManager extends Manager
 
 
         if (!$result && $_POST['username'] == 'admin') {
-            header('Location: index.php?action=loginAdmin&err=$err');
+            header('Location: /loginAdmin/?err=$err');
         } elseif (!$result && $_POST['username']  != 'admin') {
-            header('Location: index.php?action=loginUser&err=$err');
+            header('Location: /loginUser/?err=$err');
         } else {
             if ($isPasswordCorrect) {
                 $_SESSION['username'] = $_POST['username'];
                 $_SESSION['img'] = $result['img'];
             } elseif (!$isPasswordCorrect) {
-                header('Location: index.php?action=loginUser&err=$err');
+                header('Location: /loginUser/?err=$err');
             }
         }
     }

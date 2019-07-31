@@ -5,7 +5,7 @@ $script = '<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froa
 <?php ob_start() ?>
 
 <section class="editor-container">
-    <form action="index.php?action=updateChapterData&id=<?= $chapter['id']?>" method="post">
+    <form action="/updateChapterData/?id=<?= $chapter['id']?>" method="post">
         <label for="editor_title">Titre</label>
         <input type="text" name="editor_title" value="<?= $chapter['title'] ?>">
         <label for="editor_content">Contenu</label>

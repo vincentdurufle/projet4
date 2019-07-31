@@ -197,9 +197,63 @@ nav ul li a:visited {
     border: 2px solid black;
 }
 
+
 .profile-picture {
     border-radius: 50%;
     width: 80px;
+}
+
+/* ===================== */
+/* ===== TEMPLATE ====== */
+/* ===================== */
+
+.template-container {
+    min-height: calc(85vh - 42px);
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+.template-menu {
+    width: 25%;
+    background-color: var(--secondary);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 0.25rem;
+    position: absolute;
+    height: 100%;
+    transform: translateX(-90%);
+    transition: all 0.5s ease-out;
+}
+
+.template-menu:hover {
+    transform: translateX(0%);
+}
+
+.template-menu ul {
+    padding: 0;
+    margin-top: 50px;
+}
+.template-menu ul li {
+    list-style: none;
+    text-align: right;
+    width: 100%;
+    display: flex;
+    
+    
+}
+
+.template-menu ul li a:link,
+.template-menu ul li a:visited {
+    text-decoration: none;
+    color: white;
+}
+.template-menu ul li a {
+    width: inherit;
+    padding: 15px 55px 15px 0;
+}
+.content {
+    width: 100%;
+    display: flex;
 }
 
 /* ================== */
@@ -211,7 +265,6 @@ nav ul li a:visited {
     justify-content: center;
     align-items: center;
     min-height: calc(85vh - 42px);
-    
 }
 
 .error-container {

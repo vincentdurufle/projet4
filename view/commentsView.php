@@ -23,7 +23,7 @@ if (!isset($_SESSION['username'])) {
                 </p>
                 <div class="comment-content">
                     <?= nl2br($comment['content']) ?>
-                    <a class="delete" href="?action=deleteComment&id=<?= $comment['id'] ?>">X</a>
+                    <a class="delete" href="/deleteComment/?id=<?= $comment['id'] ?>">X</a>
                 </div>
                 <?php
                 if(!$comment) {

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../public/css/normalize.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <?php if (isset($link)) {
-       echo $link;
+        echo $link;
     }
     ?>
     <title>Jean Forteroche</title>
@@ -20,21 +20,24 @@
     <nav class="menu">
         <ul>
             <li>
-                <h2><a href="./index.php">Jean Forteroche</a></h2>
+                <h2><a href="/">Jean Forteroche</a></h2>
             </li>
-            <li><a href="./index.php">Accueil</a> </li>
+            <li><a href="/">Accueil</a> </li>
             <li><a href="/">Chapitres</a></li>
-            <li><a href="?action=loginUser">Connexion</a></li>
+            <li><a href="/login">Connexion</a></li>
         </ul>
     </nav>
+    
     <?= $content ?>
+
+
     <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="?action=loginAdmin"> Connexion</a></footer>
     
     <?php if (isset($script)) {
-       echo $script;
+        echo $script;
     }
     ?>
-    <script src="./public/js/script.js"></script>
+    <script src="../public/js/script.js"></script>
 </body>
 
 </html>

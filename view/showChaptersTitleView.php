@@ -13,7 +13,7 @@
 
 <?php
 while ($chapter = $chapters->fetch()) {
-    echo '<div class="title"><h1><a href="?action=updateChapter&id='. $chapter['id'] .'">' . $chapter['title'] . '</a></h1><span>' . $req->get_time_ago(strtotime($chapter['date_creation'])) .'</span> <a class="delete" href="?action=deleteChapter&id=' . $chapter['id'] .' ">X</a></div>';
+    echo '<div class="title"><h1><a href="/updateChapter/?id='. $chapter['id'] .'">' . $chapter['title'] . '</a></h1><span>' . $req->get_time_ago(strtotime($chapter['date_creation'])) .'</span> <a class="delete" href="/deleteChapter/?id=' . $chapter['id'] .' ">X</a></div>';
 }
 ?>
 

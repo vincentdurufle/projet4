@@ -8,10 +8,12 @@ function showChapters() {
 }
 
 function showChapter() {
-    $req =  new ChapterManager();
-    $chapter = $req->getChapter();
-    
-    require('./view/updateChapterView.php');
+    if (isset($_GET['id']) && $_GET['id'] > 0 ) {
+        $req =  new ChapterManager();
+        $chapter = $req->getChapter();
+        
+        require('./view/updateChapterView.php');
+    }
 }
 
 function showTitles() {
@@ -22,13 +24,15 @@ function showTitles() {
 }
 
 function post() {
-    $chapter = new ChapterManager();
-    $post = $chapter->getChapter();
-
-    $req = new CommentManager();
-    $comments = $req->getComments();
-
-    require('./view/chapterView.php');
+    if (isset($_GET['id']) && $_GET['id'] > 0) {
+        $chapter = new ChapterManager();
+        $post = $chapter->getChapter();
+    
+        $req = new CommentManager();
+        $comments = $req->getComments();
+    
+        require('./view/chapterView.php');
+    }
 }
 
 function showComments() {
