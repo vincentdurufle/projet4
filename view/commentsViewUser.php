@@ -8,11 +8,11 @@ if (!isset($_SESSION['username'])) {
 
 <section>
 
-<section class="chapters-containers">
-    <h1>Veuillez séléctionner un commentaire pour le supprimer.</h1>
-    
+    <section class="chapters-containers">
+        <h1>Veuillez séléctionner un commentaire pour le supprimer.</h1>
 
-<div class="comments">
+
+        <div class="comments">
             <h2>Commentaires</h2>
             <?php
             while ($comment = $comments->fetch()) {
@@ -25,18 +25,15 @@ if (!isset($_SESSION['username'])) {
                     <?= nl2br($comment['content']) ?>
                     <a class="delete" href="/deleteComment/?id=<?= $comment['id'] ?>">X</a>
                 </div>
-                <?php
-                if(!$comment) {
-                    echo '<p>Il n\'y a pas de commentaire à modérer</p>';
-                }
-                }
-                $comments->closeCursor();
-                        ?>
-            </div>
+            <?php
+            }
+            if ($comments->rowCount() == 0) {
+                echo '<p>Il n\'y a pas de commentaires !</p>';
+            }
+            ?>
+        </div>
+    </section>
 
+    <?php $content = ob_get_clean() ?>
 
-</section>
-
-<?php $content = ob_get_clean() ?>
-
-<?php require('./view/template.php') ?>
+    <?php require('./view/template.php') ?>

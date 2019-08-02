@@ -30,18 +30,17 @@ function updateChapter()
             'content' => $_POST['editor_content'],
         ]);
         $updateChapter = new ChapterManager();
-        $updateChapter->update($req);    
+        $updateChapter->update($req);
     } else {
         header('Location: /loginUser/?err=$err');
     }
-    
 }
 
 function deleteChapter()
 {
     if (isset($_GET['id'])) {
         $req = new Chapter(['id' => $_GET['id']]);
-    
+
         $deleteChapter = new ChapterManager();
         $deleteChapter->delete($req);
     }
@@ -49,19 +48,27 @@ function deleteChapter()
 
 function addComment()
 {
-    $req = new Comment([
-        'chapter_id' => $_GET['id'],
-        'name' => $_SESSION['username'],
-        'content' => $_POST['editor_content']
-    ]);
-    $comment = new CommentManager();
-    $comment->add($req);
-    header('Location: index.php?action=post&id=' . $_GET['id'] . '');
+    if(isset($_SESSION['username']) && $_GET['id'] > 0) {
+        $req = new Comment([
+            'chapter_id' => $_GET['id'],
+            'content' => $_POST['editor_content'],
+            'name' => $_SESSION['username'],
+            'img' => $_SESSION['img']
+        ]);
+        
+        $comment = new CommentManager();
+        $comment->add($req);
+    }
+    header('Location: /chapitre/?id=' . $_GET['id'] . '');
 }
 
 function addCommentPage()
 {
-    require('./view/addCommentView.php');
+    if (!isset($_SESSION['username'])) {
+        header('Location: /login');
+    } else {
+        require('./view/addCommentView.php');
+    }
 }
 
 function deleteComment()
@@ -73,6 +80,9 @@ function deleteComment()
 
 function reportComment()
 {
-    $report = new CommentManager();
-    $report->report();
+    if(isset($_SESSION['username']) && $_GET['id'] > 0) {
+        $report = new CommentManager();
+        $report->report();
+    }
+    
 }

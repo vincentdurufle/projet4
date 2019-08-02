@@ -9,7 +9,7 @@ $script = '<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froa
 
 <section class="editor-container">
 
-    <form action="index.php?action=addCommentData&id=<?= $_GET['id'] ?>" method="post">
+    <form action="/addCommentData/?id=<?= $_GET['id'] ?>" method="post">
         <label for="editor_content">Commentaire</label>
         <textarea name="editor_content" id="editor"></textarea>
         <input type="submit" value="Envoyer">

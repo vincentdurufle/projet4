@@ -24,15 +24,19 @@ function loginAdmin()
         if (!empty($_POST['username'] || !empty($_POST['password']))) {
             $admin = new UserManager;
             $req = $admin->checkUser();
-            require('./view/adminInterface.php');        
+            require('./view/adminInterface.php');
         }
     }
 }
 function loginUser()
 {
-    $user = new UserManager;
-    $req = $user->checkUser();
-    require('./view/userInterface.php');
+    if (isset($_POST['submit'])) {
+        if (!empty($_POST['username']) && !empty($_POST['password'])) {
+            $user = new UserManager;
+            $req = $user->checkUser();
+            require('./view/userInterface.php');
+        }
+    }
 }
 
 function loginUserPage()
@@ -52,14 +56,16 @@ function disconnect()
 
 function createUser()
 {
-    $user = new User([
-        'username' => $_POST['username'],
-        'password' => $_POST['password'],
-        'email' => $_POST['email'],
-        'token' => 16
-    ]);
-    $req = new UserManager();
-    $req->createUser($user);
+    if (isset($_POST['username']) && !empty($_POST['username']) and isset($_POST['email']) && !empty($_POST['email'] && isset($_POST['password']) && !empty($_POST['password']))) {
+        $user = new User([
+            'username' => $_POST['username'],
+            'password' => $_POST['password'],
+            'email' => $_POST['email'],
+            'token' => 16
+        ]);
+        $req = new UserManager();
+        $req->createUser($user);
+    }
 }
 
 function verifyUser()
@@ -75,7 +81,9 @@ function addImagePage()
 
 function addImage()
 {
-    $img = new UserManager();
-    $img->addImage();
-    $img->userImgName();
+    if(isset($_SESSION['username'])) {
+        $img = new UserManager();
+        $img->addImage();
+        $img->userImgName();
+    }
 }

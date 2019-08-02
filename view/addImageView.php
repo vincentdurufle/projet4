@@ -5,8 +5,8 @@ if (!isset($_SESSION['username'])) {
 ?>
 <?php ob_start() ?>
 
-<section class="image-upload-container">
-    <form action="index.php?action=uploadImg" method="post" enctype="multipart/form-data">
+<section class="login-container">
+    <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="image" />
         <input type="submit" name="submit" value="Submit" />
     </form>

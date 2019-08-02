@@ -1,7 +1,6 @@
 <?php
     if(!isset($_SESSION['username'])) {
-        header('Location: index.php?loginUser');
-        echo $_SESSION;
+        header('Location: /login');
     }
 ?>
 
@@ -9,11 +8,11 @@
 <?php ob_start() ?>
 
 <section class="interface-container">
-<h1>Bienvenue, <?= $_SESSION['username'] ?></h1> <img class="profile-picture" src="./upload/<?= $_SESSION['img'] ?>" alt="">
-
-    <a href="?action=addProfilePicture">Ajouter une photo de profil</a>
-    <a href="?action=moderateComments">Voir ses commentaires</a>
-    <a href="?action=disconnect">Déconnexion</a>
+    <div class="interface">
+        <a href="/picture"><i class="fas fa-portrait"></i> Ajouter une photo de profil</a>
+        <a href="/moderate"><i class="far fa-comments"></i> Voir ses commentaires</a>
+        <a href="/disconnect"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+    </div>
 </section>
 
 

@@ -38,11 +38,12 @@ function post() {
 function showComments() {
     $req = new CommentManager();
     if($_SESSION['username'] == 'admin') {
-        $comments = $req->getCommentsAdmin();
+        list($comments, $reports) = $req->getCommentsAdmin();
+        require('./view/commentsViewAdmin.php');
     } else {
         $comments = $req->getCommentsUser();
+        require('./view/commentsViewUser.php');
     }
-
-    require('./view/commentsView.php');
+    
 }
 

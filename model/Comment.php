@@ -5,6 +5,7 @@ class Comment
     private $chapter_id;
     private $name;
     private $content;
+    private $img;
 
     public function __construct($data = [])
     {
@@ -27,7 +28,6 @@ class Comment
         $this->chapter_id = $chapter_id;
     }
 
-
     public function setname($name)
     {
 
@@ -38,9 +38,8 @@ class Comment
         $this->content = $content;
     }
 
-    public function setDate_creation($date_creation)
-    {
-        $this->date_creation = $date_creation;
+    public function setImg($img) {
+        $this->img = $img;
     }
 
     public function chapter_id()
@@ -52,8 +51,13 @@ class Comment
     {
         return $this->name;
     }
+
     public function content()
     {
         return $this->content;
+    }
+    public function img() 
+    {
+        return $this->img;
     }
 }

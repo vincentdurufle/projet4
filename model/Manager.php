@@ -12,7 +12,8 @@ class Manager
     }
 
     public function get_time_ago($time)
-    {
+    {   
+        date_default_timezone_set('Europe/Paris');
         $time_difference = time() - $time;
 
         if ($time_difference < 1) {

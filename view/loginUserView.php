@@ -10,24 +10,19 @@
     }
 ?>
 
-<form action="?action=createUser" method="post">
+<form action="/create" method="post" autocomplete="off">
     <h1>Créer un compte</h1>
-        <label for="username">Nom d'utilisateur</label>
-        <input type="text" name="username">
-        <label for="email">Email</label>
-        <input type="email" name="email">
-        <label for="password">Mot de passe</label>
-        <input type="password" name="password">
+        <input type="text" name="username" placeholder="Nom d'utilisateur">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Mot de passe" autocomplete="user-password">
         <input type="submit" name="submit" placeholder="Envoyer">
     </form>
 
 
-    <form action="?action=checkLoginUser" method="post">
+    <form action="/loginUser" method="post">
         <h1>S'identifier</h1>
-        <label for="username">Nom d'utilisateur</label>
-        <input type="text" name="username">
-        <label for="password">Mot de passe</label>
-        <input type="password" name="password">
+        <input type="text" name="username" placeholder="Nom d'utilisateur">
+        <input type="password" name="password" placeholder="Mot de passe">
         <input type="submit" name="submit" placeholder="Envoyer">
     </form>
 </section>

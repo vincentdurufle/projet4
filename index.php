@@ -39,36 +39,18 @@ if ($request_uri[0] == '/') {
     loginUserPage();
 } elseif($request_uri[0] == '/create') {
     createUser();
+} elseif($request_uri[0] == '/verify/') {
+    verifyUser();
+} elseif($request_uri[0] == '/loginUser') {
+    loginUser();
+} elseif($request_uri[0] == '/picture') {
+            addImagePage();    
+} elseif($request_uri[0] == '/upload') {
+    addImage();
+} elseif($request_uri[0] == '/addComment/') {
+    addCommentPage();
+} elseif($request_uri[0] == '/addCommentData/') {
+    addComment();
+} elseif($request_uri[0] == '/report/') {
+    reportComment();
 }
-
-
-//  elseif ($_GET['action'] == 'createUser') {
-//         if (isset($_POST['username']) && !empty($_POST['username']) and isset($_POST['email']) && !empty($_POST['email'] && isset($_POST['password']) && !empty($_POST['password']))) {
-//             createUser();
-//         }
-//     } elseif ($_GET['action'] == 'verify') {
-//         verifyUser();
-//     } elseif ($_GET['action'] == 'loginUser') {
-//         loginUserPage();
-//     } elseif ($_GET['action'] == 'checkLoginUser') {
-//         if (isset($_POST['submit'])) {
-//             if (empty($_POST['username'] || empty($_POST['password']))) {
-//                 echo "Veuillez saisir un nom d'utilisateur et mot de passe";
-//             } else {
-//                 loginUser();
-//             }
-//         }
-//     } elseif ($_GET['action'] == 'addComment') {
-//         if(!isset($_SESSION['username'])) {
-//             loginUserPage();
-//         }else {
-//             addCommentPage();
-//         }
-//     } elseif ($_GET['action'] == 'addCommentData') {
-//         addComment();
-//     } elseif ($_GET['action'] == 'addProfilePicture') {
-//         addImagePage();
-//     } elseif($_GET['action'] == 'uploadImg') {
-//         addImage();
-//     }
-// } 

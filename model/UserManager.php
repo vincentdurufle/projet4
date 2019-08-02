@@ -40,21 +40,24 @@ class UserManager extends Manager
         $req->bindValue(':password', $user->password());
         $req->bindValue(':email', $user->email());
         $req->bindValue(':token', $user->token());
-
+        
+        $req->execute();
 
         $to = $user->email();
         $subject = 'Vérification d\'email';
         $message = '
     Merci de vous être inscrit au site de Jean Forteroche.
+
     Veuillez maintenant valider votre addresse mail pour utiliser votre compte 
     en cliquant sur ce lien : 
-    http://localhost/?action=verify&email=' . $user->email() . '&token=' . $user->token() . '
+    http://localhost/verify/?email=' . $user->email() . '&token=' . $user->token() . '
     ';
         $headers = 'From:noreply@projet4.vincentdurufle.com' . "\r\n";
         $headers .= 'Content-Type: text/plain; charset="utf-8"' . " ";
         mail($to, $subject, $message, $headers);
 
-        $req->execute();
+        
+        header('Location: /login');
     }
 
     public function activateUser()
@@ -66,16 +69,15 @@ class UserManager extends Manager
         if ($res) {
             $update = $db->prepare('UPDATE users SET active = 1 WHERE email = ? AND token = ?');
             $update->execute(array($_GET['email'], $_GET['token']));
-        } else {
-            header('Location: index.php?action=loginUser&err=$err');
-        }
+        }   
+        header('Location: /login');
     }
     public function addImage()
     {
         $file = $_FILES['image']['tmp_name'];
         $sourceProperties = getimagesize($file);
         $fileNewName = time();
-        $folderPath = "./upload/";
+        $folderPath = "./public/img/";
         $ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
         $imageType = $sourceProperties[2];
 
@@ -112,12 +114,6 @@ class UserManager extends Manager
                 exit;
                 break;
         }
-
-
-        // move_uploaded_file($file, $folderPath. $fileNewName. ".". $ext);
-        echo "Image Resize Successfully.";
-        
-
     }
     public function imageResize($imageResourceId, $width, $height)
     {
@@ -148,5 +144,7 @@ class UserManager extends Manager
 
         $req->execute();
         
+        $_SESSION['img'] = $this->imgName;
+        header('Location: /login');
     }
 }

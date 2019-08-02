@@ -24,15 +24,21 @@
             </li>
             <li><a href="/">Accueil</a> </li>
             <li><a href="/">Chapitres</a></li>
-            <li><a href="/login">Connexion</a></li>
+            <?php if(isset($_SESSION['username']) && isset($_SESSION['img'])) {
+                echo '<li class="profile"><a class="profile-username" href="/login"><img class="profile-picture" src="/public/img/'.$_SESSION['img'].'" alt="photo de profile">'.$_SESSION['username'].'</a></li>';
+            } elseif (isset($_SESSION['username']) && !isset($_SESSION['img'])) {
+                echo '<li><a href="/login">'.$_SESSION['username'].'</a></li>';
+            } else {
+                echo '<li><a href="/login">Connexion</a></li>';
+            }
+            ?>
         </ul>
     </nav>
-    
+
     <?= $content ?>
 
+    <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="/admin"> Admin</a></footer>
 
-    <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="?action=loginAdmin"> Connexion</a></footer>
-    
     <?php if (isset($script)) {
         echo $script;
     }
