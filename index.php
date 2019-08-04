@@ -37,20 +37,28 @@ if ($request_uri[0] == '/') {
     disconnect();
 } elseif ($request_uri[0] == '/login') {
     loginUserPage();
-} elseif($request_uri[0] == '/create') {
+} elseif ($request_uri[0] == '/create') {
     createUser();
-} elseif($request_uri[0] == '/verify/') {
+} elseif ($request_uri[0] == '/verify/') {
     verifyUser();
-} elseif($request_uri[0] == '/loginUser') {
+} elseif ($request_uri[0] == '/loginUser') {
     loginUser();
-} elseif($request_uri[0] == '/picture') {
-            addImagePage();    
-} elseif($request_uri[0] == '/upload') {
+} elseif ($request_uri[0] == '/picture') {
+    addImagePage();
+} elseif ($request_uri[0] == '/upload') {
     addImage();
-} elseif($request_uri[0] == '/addComment/') {
+} elseif ($request_uri[0] == '/addComment/') {
     addCommentPage();
-} elseif($request_uri[0] == '/addCommentData/') {
+} elseif ($request_uri[0] == '/addCommentData/') {
     addComment();
-} elseif($request_uri[0] == '/report/') {
+} elseif ($request_uri[0] == '/report/') {
     reportComment();
+} elseif ($request_uri[0] == '/updatepwd') {
+    updatePasswordPage();
+} elseif (request_uri[0] == '/reset/') {
+    resetPasswordPage();
+} elseif (request_uri[0] == '/newPassword') {
+    newPassword();
+} else {
+    error();
 }

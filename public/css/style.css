@@ -326,13 +326,6 @@ nav ul li a:visited {
     min-height: calc(85vh - 42px);
 }
 
-.error-container {
-    padding: 10px;
-    background-color: white;
-    border: 2px solid red;
-    border-radius: 0.25rem;
-}
-
 .login-container form {
     display: flex;
     justify-content: center;
@@ -358,7 +351,7 @@ nav ul li a:visited {
     box-shadow:  0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
 }
 
-.login-container form input:not(:last-child) {
+.login-container form input {
     border: none;
   border-bottom: 1px solid white;;
   -webkit-text-fill-color: white;
@@ -368,7 +361,7 @@ nav ul li a:visited {
   margin: 10px 0;
 }
 
-.login-container form input:last-child {
+.login-container form input[type='submit'] {
     background-color: var(--third);
     color: white;
     border: none;
@@ -377,6 +370,22 @@ nav ul li a:visited {
     margin-top: 10px;
     box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
     
+}
+
+.login-container a:link,
+.login-container a:visited {
+    text-decoration: none;
+    font-style: italic;
+    position: absolute;
+    top: 90%;
+    left: 45%;
+    color: var(--main);
+    text-shadow: 0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7);
+    
+}
+.login-container a:hover {
+    color: white;
+    transition: 0.5s;
 }
 
 /* ================== */
@@ -430,6 +439,33 @@ nav ul li a:visited {
     border-radius: 50%;
     background-color: var(--third);
 }
+
+/* ================== */
+/* ===== ERROR ====== */
+/* ================== */
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(85vh - 42px);
+    flex-direction: column;
+    position: relative;
+}
+.error span {
+    position: absolute;
+    font-size: 1400%;
+    font-weight: bold;
+    top: 15%;
+}
+.error h1 {
+    font-size: 800%;
+    font-weight: bold;
+    color: white;
+    z-index: 10;
+    margin: 50px;
+}
+
 
 /* ================== */
 /* ===== FOOTER ===== */

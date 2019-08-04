@@ -9,19 +9,27 @@
     <link rel="stylesheet" href="./public/css/style.css">
     <link rel="stylesheet" href="./public/css/normalize.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png"/>
     <title>Jean Forteroche</title>
 </head>
 
 <body>
     <section class="header">
-        <nav>
+        <nav class="menu">
             <ul>
                 <li>
                     <h2><a href="/">Jean Forteroche</a></h2>
                 </li>
                 <li><a href="/">Accueil</a> </li>
                 <li><a href="/">Chapitres</a></li>
-                <li><a href="/login">Connexion</a></li>
+                <?php if (isset($_SESSION['username']) && isset($_SESSION['img'])) {
+                    echo '<li class="profile"><a class="profile-username" href="/login"><img class="profile-picture" src="/public/img/' . $_SESSION['img'] . '" alt="photo de profile">' . $_SESSION['username'] . '</a></li>';
+                } elseif (isset($_SESSION['username']) && !isset($_SESSION['img'])) {
+                    echo '<li><a href="/login">' . $_SESSION['username'] . '</a></li>';
+                } else {
+                    echo '<li><a href="/login">Connexion</a></li>';
+                }
+                ?>
             </ul>
         </nav>
         <h1>Billet simple pour l'Alaska</h1>
@@ -39,7 +47,7 @@
                 </div>
                 <p> <?= $data['content'] ?> </p>
                 <a href="/chapitre/?id=<?= $data['id'] ?>">Commentaires</a>
-                
+
             </div>
         <?php
         }

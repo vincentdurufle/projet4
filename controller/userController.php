@@ -21,10 +21,12 @@ function loginAdminPage()
 function loginAdmin()
 {
     if (isset($_POST['submit'])) {
-        if (!empty($_POST['username'] || !empty($_POST['password']))) {
+        if (!empty($_POST['username'] && !empty($_POST['password']))) {
             $admin = new UserManager;
             $req = $admin->checkUser();
             require('./view/adminInterface.php');
+        } else {
+            header('Location: /admin?err');
         }
     }
 }
@@ -35,6 +37,8 @@ function loginUser()
             $user = new UserManager;
             $req = $user->checkUser();
             require('./view/userInterface.php');
+        } else {
+            header('Location: /login?err');
         }
     }
 }
@@ -66,6 +70,14 @@ function createUser()
         $req = new UserManager();
         $req->createUser($user);
     }
+}
+
+function updatePassword() {
+    $req = new User([
+        'email' => $_POST['email'],
+        'token' => 16
+    ]);
+    
 }
 
 function verifyUser()

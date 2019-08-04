@@ -47,3 +47,10 @@ function showComments() {
     
 }
 
+function error() {
+    require('./view/404.php');
+}
+
+function updatePasswordPage() {
+    require('./view/updatePasswordPage.php');
+}
