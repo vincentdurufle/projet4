@@ -95,7 +95,7 @@ class UserManager extends Manager
         if($res) {
             $token = $db->prepare('UPDATE users SET token = :token WHERE email = :email');
             $token->bindValue(':email', $user->email());
-            $token->bindValue(':email', $user->token());
+            $token->bindValue(':token', $user->token());
     
             $token->execute();
 
@@ -110,13 +110,32 @@ class UserManager extends Manager
             $headers = 'From:noreply@projet4.vincentdurufle.com' . "\r\n";
             $headers .= 'Content-Type: text/plain; charset="utf-8"' . " ";
             mail($to, $subject, $message, $headers);
+
+            header('Location: /password?success=1');
+        } else {
+            header('Location: /password?err=3');
         }
     }
 
     public function reset(User $user) {
         $db = $this->dbConnect();
 
-        
+        $req = $db->prepare('SELECT email, token FROM users WHERE email = :email AND token = :token');
+        $req->bindValue(':email', $user->email());
+        $req->bindValue(':token', $_GET['token']);
+        $req->execute();
+
+        $res = $req->fetch();
+        if($res) {
+            $update = $db->prepare('UPDATE users SET token = :token, password = :password WHERE email = :email');
+            $update->bindValue(':token', $user->token());
+            $update->bindValue(':password', $user->password());
+            $update->bindValue(':email', $user->email());
+
+            $update->execute();
+
+            header('Location: /login?success=2');
+        } 
     }
 
     public function addImage()

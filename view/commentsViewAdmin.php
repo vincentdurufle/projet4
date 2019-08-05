@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
 <section>
 
     <section class="chapters-containers">
-        <h1>Veuillez séléctionner un commentaire pour le supprimer.</h1>
+        <h1 class="title-container">Veuillez séléctionner un commentaire pour le supprimer.</h1>
 
 
         <div class="comments">

@@ -1,18 +1,20 @@
 <?php
-    if(!isset($_SESSION['username'])) {
-        header('Location: index.php?login');
-    }
+if (!isset($_SESSION['username'])) {
+    header('Location: index.php?login');
+}
 ?>
 
 
 <?php ob_start() ?>
 
 <section class="interface-container">
-<h1>Bienvenue, <?= $_SESSION['username'] ?></h1>
-    <a href="/addChapter">Ajouter un chapitre</a>
-    <a href="/updateChapter">Mettre à jour un chapitre</a>
-    <a href="/moderate">Voir les commentaires</a>
-    <a href="/disconnect">Déconnexion</a>
+    <div class="interface">
+        <a href="/picture"><i class="fas fa-portrait"></i> Ajouter une photo de profil</a>
+        <a href="/addChapter"><i class="fas fa-pen"></i> Ajouter un chapitre</a>
+        <a href="/updateChapter"><i class="fas fa-edit"></i> Mettre à jour un chapitre</a>
+        <a href="/moderate"><i class="far fa-comments"></i> Voir les commentaires</a>
+        <a href="/disconnect"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+    </div>
 </section>
 
 

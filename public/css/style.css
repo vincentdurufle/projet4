@@ -63,14 +63,23 @@ nav {
     height: 15vh;
     width: 100%;
 }
-nav ul {
+nav ul,
+.menu-list-container {
     list-style: none;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-nav ul li {
-    flex: 1;
+.menu-list-container {
+    width: 40%;
+}
+.menu ul i {
+    display: none;
+    color: white;
+}
+
+nav ul div li {
+    flex: 3;
     text-align: center;
 }
 
@@ -149,6 +158,19 @@ nav ul li a:visited {
 /* ===== COMMENTS ===== */
 /* ==================== */
 
+.comments-container {
+    min-height: calc(85vh - 42px);
+}
+.title-container {
+    color: white;
+    text-align: center;
+    width: 50%;
+    margin: 50px calc(25% - 20px);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.342);
+    border-radius: 0.25rem;
+}
+
 .comments {
     background-color: white;
     margin: 50px;
@@ -226,7 +248,7 @@ nav ul li a:visited {
     background-color: var(--third);
 }
 
-.interface-container a:first-child {
+.interface-container a:not(:last-child) {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
     border-bottom: 1px solid lightgray;
@@ -235,7 +257,6 @@ nav ul li a:visited {
 .interface-container a:last-child {
     border-bottom-left-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
-    border-top: 1px solid lightgray;
 }
 
 .interface-container a:link,
@@ -246,7 +267,6 @@ nav ul li a:visited {
     width: 100%;
     background-color: var(--secondary);
     text-align: center; 
-    font-weight: bold;
 }
 
 

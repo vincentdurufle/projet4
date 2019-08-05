@@ -16,7 +16,7 @@
         <input type="text" name="username" placeholder="Nom d'utilisateur">
         <input type="password" name="password" placeholder="Mot de passe">
         <input type="submit" name="submit" placeholder="Envoyer">
-        <a href="/updatepwd">Mot de passe oublié ?</a>
+        <a href="/password">Mot de passe oublié ?</a>
     </form>
 </section>
 

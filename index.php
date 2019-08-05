@@ -53,12 +53,14 @@ if ($request_uri[0] == '/') {
     addComment();
 } elseif ($request_uri[0] == '/report/') {
     reportComment();
-} elseif ($request_uri[0] == '/updatepwd') {
+} elseif ($request_uri[0] == '/password') {
     updatePasswordPage();
-} elseif (request_uri[0] == '/reset/') {
-    resetPasswordPage();
-} elseif (request_uri[0] == '/newPassword') {
-    newPassword();
+} elseif ($request_uri[0] == '/updatepassword') {
+    updatePassword();
+} elseif ($request_uri[0] == '/reset/') {
+    resetPage();
+} elseif ($request_uri[0] == '/resetPassword/') {
+    resetPassword();
 } else {
     error();
 }

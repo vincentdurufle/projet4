@@ -1,0 +1,85 @@
+@media only screen and (max-width:480px) {
+
+    .header {
+        background-position: center;
+    }
+
+    .menu {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .menu ul {
+        height: 100%;
+        position: relative;
+    }
+
+    .menu-list-container {
+        display: none;
+        justify-content: space-evenly;   
+        align-items: center;
+        width: 100%;
+    }
+    .menu-list-container li {
+        text-align: center;
+        flex: unset;
+    }
+
+    .menu ul:first-child {
+        padding-left: 0px;
+    }
+
+    .menu ul li:first-child {
+        flex: unset;
+        
+    }
+    .menu ul i {
+        display: block;
+        cursor: pointer;
+        font-size: 150%;
+        
+    }
+    
+    .fa-times {
+        top: 10%;
+        cursor: pointer;
+        font-size: 150%;
+        position: absolute;
+    }
+
+    .header h1 {
+        text-align: center;
+    }
+    .fa-book {
+        margin: 5vh 0;
+    }
+
+    .chapter {
+        margin: 50px 25px;
+    }
+
+    .comments {
+        width: 80%;
+        margin: 5% 5%;
+        
+    }
+
+    .login-container {
+        flex-direction: column;
+    }
+
+    .interface {
+        width: 80%;
+    }
+
+    .editor-container {
+        max-width: 100%;
+        width: 100%;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .editor-container form {
+        width: 90%;
+    }
+}

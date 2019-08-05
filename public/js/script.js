@@ -19,7 +19,7 @@ if (document.URL.includes('/updateChapter' || '/moderate')) {
 }
 
 function error(message, nmb) {
-    if(document.URL.includes(`?err=${nmb}`)) {
+    if(document.URL.includes(`err=${nmb}`)) {
         new Noty({
             type: 'error',
             text: message,
@@ -29,7 +29,7 @@ function error(message, nmb) {
 }
 
 function success(message, nmb) {
-    if(document.URL.includes(`?success=${nmb}`)) {
+    if(document.URL.includes(`success=${nmb}`)) {
         new Noty({
             type: 'success',
             text: message,
@@ -38,7 +38,28 @@ function success(message, nmb) {
     }
 }
 
-error('Merci de renseigner tous les champs demandés;', 1);
+error('Merci de renseigner tous les champs demandés', 1);
 error('Le nom d\'utilisateur ou email que vous avez renseigné existe déjà.', 2);
+error('Aucun compte ne correspond à votre addresse mail. Merci d\'en renseigner un autre.');
 
-success('Merci, un message vous a été envoyer avec un lien d\'activation', 1);
+success('Merci, un email vous a été envoyer avec un lien d\'activation', 1);
+success('Votre mot de passe à été mis à jour avec succès', 2);
+
+
+
+function toggle() {
+    if (menu.classList == 'fas fa-bars') {
+        menu.classList.remove('fa-bars');
+        menu.classList.add('fa-times');
+        document.querySelector('.menu-list-container').style.display = 'flex';
+        document.querySelector('.menu ul li h2').style.display = 'none';
+    } else {
+        document.querySelector('.menu-list-container').style.display = 'none';
+        document.querySelector('.menu ul li h2').style.display = 'flex';
+        menu.classList.add('fa-bars');
+        menu.classList.remove('fa-times');
+    }
+}
+
+const menu = document.querySelector('.fa-bars');
+menu.addEventListener('click', toggle);

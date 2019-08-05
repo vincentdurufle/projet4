@@ -72,14 +72,40 @@ function createUser()
     }
 }
 
-function updatePassword() {
-    $req = new User([
-        'email' => $_POST['email'],
-        'token' => 16
-    ]);
-    
+function updatePassword()
+{
+    if(isset($_POST['email'])) {
+        $req = new User([
+            'email' => $_POST['email'],
+            'token' => 16
+        ]);
+        $email = new UserManager();
+        $email->update($req);
+    } else {
+        header('Location: /password?err=1');
+    }
+
 }
 
+function resetPage()
+{
+    require('./view/resetPasswordPage.php');
+}
+
+function resetPassword()
+{ 
+    if(isset($_GET['email'], $_POST['password'], $_GET['token']) && !empty($_POST['password'])) {
+        $user = new User([
+            'email' => $_GET['email'],
+            'token' => 16,
+            'password' => $_POST['password']
+        ]);
+        $req = new UserManager;
+        $req->reset($user);
+    } else {
+        header('Location: /reset/?email='.$_GET['email'].'&token='.$_GET['token'].'&err=1');
+    }
+}
 function verifyUser()
 {
     $user = new UserManager();
@@ -93,7 +119,7 @@ function addImagePage()
 
 function addImage()
 {
-    if(isset($_SESSION['username'])) {
+    if (isset($_SESSION['username'])) {
         $img = new UserManager();
         $img->addImage();
         $img->userImgName();

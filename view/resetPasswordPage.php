@@ -3,8 +3,8 @@
 <section class="login-container">
 
 
-    <form action="/newPassword" method="post" autocomplete="off">
-        <h1>Entrez un nouveau mot de passe</h1>
+    <form action="/resetPassword/?email=<?= $_GET['email'] ?>&token=<?= $_GET['token'] ?>" method="post" autocomplete="off">
+        <h1>Nouveau mot de passe</h1>
         <input type="password" name="password" placeholder="Mot de passe">
         <input type="submit" name="submit" placeholder="Envoyer">
     </form>

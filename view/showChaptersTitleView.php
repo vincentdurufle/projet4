@@ -6,8 +6,8 @@
 
 <?php ob_start() ?>
 
-    <section class="chapters-containers">
-    <h1>Veuillez séléctionner un chapitre pour le mettre à jour.</h1>
+    <section class="chapter-containers">
+    <h1 class="title-container">Veuillez séléctionner un chapitre pour le mettre à jour.</h1>
     <div class="chapter">
     
 
