@@ -19,7 +19,7 @@ if (!isset($_SESSION['username'])) {
                 ?>
                 <p class='title'>
                     <strong><?= $comment['name'] ?></strong>
-                    <span><?= $req->get_time_ago(strtotime($comment['date_creation']))  ?></span>
+                    <span><?= $this->get_time_ago(strtotime($comment['date_creation']))  ?></span>
                 </p>
                 <div class="comment-content">
                     <?= nl2br($comment['content']) ?>

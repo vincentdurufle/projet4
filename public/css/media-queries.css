@@ -6,10 +6,12 @@
 
     .menu {
         background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
     }
     .menu ul {
         height: 100%;
         position: relative;
+        margin: 0;
     }
 
     .menu-list-container {
@@ -17,10 +19,12 @@
         justify-content: space-evenly;   
         align-items: center;
         width: 100%;
+        margin-top: 35px;
     }
     .menu-list-container li {
         text-align: center;
         flex: unset;
+        font-weight: bold;
     }
 
     .menu ul:first-child {
@@ -39,7 +43,7 @@
     }
     
     .fa-times {
-        top: 10%;
+        top: 15%;
         cursor: pointer;
         font-size: 150%;
         position: absolute;
@@ -47,6 +51,7 @@
 
     .header h1 {
         text-align: center;
+        margin-top: 20vh;
     }
     .fa-book {
         margin: 5vh 0;
@@ -60,6 +65,10 @@
         width: 80%;
         margin: 5% 5%;
         
+    }
+
+    .menu-before {
+        height: 20vh;
     }
 
     .login-container {
@@ -82,4 +91,5 @@
     .editor-container form {
         width: 90%;
     }
+
 }

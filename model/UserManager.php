@@ -60,7 +60,7 @@ class UserManager extends Manager
     
         Veuillez maintenant valider votre addresse mail pour utiliser votre compte 
         en cliquant sur ce lien : 
-        http://localhost/verify/?email=' . $user->email() . '&token=' . $user->token() . '
+        https://projet4.vincentdurufle.com/verify/?email=' . $user->email() . '&token=' . $user->token() . '
         ';
             $headers = 'From:noreply@projet4.vincentdurufle.com' . "\r\n";
             $headers .= 'Content-Type: text/plain; charset="utf-8"' . " ";
@@ -81,8 +81,8 @@ class UserManager extends Manager
         if ($res) {
             $update = $db->prepare('UPDATE users SET active = 1 WHERE email = ? AND token = ?');
             $update->execute(array($_GET['email'], $_GET['token']));
+            header('Location: /login?success=3');
         }
-        header('Location: /login');
     }
 
     public function update(User $user) {
@@ -105,7 +105,7 @@ class UserManager extends Manager
         Merci de vous être inscrit au site de Jean Forteroche.
     
         Pour réinitialiser votre mot de passe veuillez cliquez sur le lien ci-dessous : 
-        http://localhost/reset/?email=' . $user->email() . '&token=' . $user->token() . '
+        https://projet4.vincentdurufle.com/reset/?email=' . $user->email() . '&token=' . $user->token() . '
         ';
             $headers = 'From:noreply@projet4.vincentdurufle.com' . "\r\n";
             $headers .= 'Content-Type: text/plain; charset="utf-8"' . " ";

@@ -5,6 +5,7 @@ class Manager
     {
         try {
             $db = new PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'root', '');
+            // $db = new PDO('mysql:host=localhost;dbname=vincdgfq_projet4', 'vincdgfq_vince', 'vincent$12');
         } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();
         }
@@ -36,5 +37,16 @@ class Manager
                 return 'il y  a ' . $t . ' ' . $str . ($t > 1 ? 's' : '') . '';
             }
         }
+    }
+    
+    public function render($path, $var) {
+        foreach($var as $key => $value) {
+            $$key = $value;
+        }
+        require('./view/'.$path.'.php');
+    }
+
+    public function error() {
+        $this->render('404', []);
     }
 }

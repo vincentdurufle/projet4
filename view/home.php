@@ -23,7 +23,7 @@
                 </li>
                 <div class="menu-list-container">
                     <li><a href="/">Accueil</a> </li>
-                    <li><a href="/">Chapitres</a></li>
+                    <li><a href="/chapitres">Chapitres</a></li>
                     <?php if (isset($_SESSION['username']) && $_SESSION['username'] != 'admin' ){
                         echo '<li class="profile"><a class="profile-username" href="/login"><img class="profile-picture" src="/public/img/' . $_SESSION['img'] . '" alt="photo de profile">' . $_SESSION['username'] . '</a></li>';
                     } elseif (isset($_SESSION['username']) && $_SESSION['username'] == 'admin') {
@@ -42,12 +42,14 @@
     </section>
     <section class="chapters-container" id="chapter">
         <?php
-        while ($data = $req->fetch()) {
+        while ($data = $chapters->fetch()) {
+            
             ?>
             <div class="chapter">
                 <div class="title">
                     <h2> <?= htmlspecialchars($data['title']) ?></h2>
-                    <span><?= $chapter->get_time_ago(strtotime($data['date_creation'])) ?> </span>
+                    <span><?= $this->get_time_ago(strtotime($data['date_creation']))  ?> </span>
+                    
                 </div>
                 <p> <?= $data['content'] ?> </p>
                 <a href="/chapitre/?id=<?= $data['id'] ?>">Commentaires</a>
@@ -55,7 +57,6 @@
             </div>
         <?php
         }
-        $req->closeCursor();
         ?>
     </section>
     <script src="/public/js/script.js"></script>

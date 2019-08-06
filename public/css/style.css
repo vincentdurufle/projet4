@@ -52,7 +52,7 @@ input:focus {
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
-    background-image: url(../img/bryangoff.jpg);
+    background-image: url(../img/background.jpg);
     background-origin: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -373,7 +373,7 @@ nav ul li a:visited {
 
 .login-container form input {
     border: none;
-  border-bottom: 1px solid white;;
+  border-bottom: 1px solid white;
   -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0px 1000px var(--secondary) inset;
   transition: background-color 5000s ease-in-out 0s;

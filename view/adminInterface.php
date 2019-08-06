@@ -1,9 +1,8 @@
 <?php
 if (!isset($_SESSION['username'])) {
-    header('Location: index.php?login');
+    header('Location: /login');
 }
 ?>
-
 
 <?php ob_start() ?>
 
@@ -16,7 +15,6 @@ if (!isset($_SESSION['username'])) {
         <a href="/disconnect"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
     </div>
 </section>
-
 
 <?php $content = ob_get_clean() ?>
 

@@ -3,7 +3,7 @@
     <div class="chapter">
         <div class="title">
             <h2> <?= htmlspecialchars($post['title']) ?></h2>
-            <span><?= $chapter->get_time_ago(strtotime($post['date_creation']))  ?> </span>
+            <span><?= $this->get_time_ago(strtotime($post['date_creation']))  ?> </span>
 
 
         </div>
@@ -17,7 +17,7 @@
             <p class='title'>
                 <img class="picture-comment" src="/public/img/<?= $comment['img'] ?>" alt="">
                 <strong><?= htmlspecialchars($comment['name']) ?></strong>
-                <span><?= $req->get_time_ago(strtotime($comment['date_creation'])) ?></span>
+                <span><?= $this->get_time_ago(strtotime($comment['date_creation'])) ?></span>
 
             </p>
             <div class="comment-content">
@@ -29,7 +29,6 @@
         if ($comments->rowCount() == 0) {
             echo '<p>Il n\'y a pas de commentaire, soyez le premier !</p>';
         }
-        $comments->closeCursor();
         ?>
         <a href="/addComment/?id=<?= $_GET['id'] ?>">Ajouter un commentaire</a>
     </div>

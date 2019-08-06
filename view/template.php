@@ -20,15 +20,15 @@
 </head>
 
 <body>
+    
 <nav class="menu">
             <ul>
                 <li>
                     <h2><a href="/">Jean Forteroche</a></h2>
                 </li>
                 <div class="menu-list-container">
-                    <i class="fas fa-bars"></i>
                     <li><a href="/">Accueil</a> </li>
-                    <li><a href="/">Chapitres</a></li>
+                    <li><a href="/chapitres">Chapitres</a></li>
                     <?php if (isset($_SESSION['username']) && $_SESSION['username'] != 'admin' ){
                         echo '<li class="profile"><a class="profile-username" href="/login"><img class="profile-picture" src="/public/img/' . $_SESSION['img'] . '" alt="photo de profile">' . $_SESSION['username'] . '</a></li>';
                     } elseif (isset($_SESSION['username']) && $_SESSION['username'] == 'admin') {
@@ -38,9 +38,10 @@
                     }
                     ?>
                 </div>
+                <i class="fas fa-bars"></i>
             </ul>
         </nav>
-
+        <div class="menu-before"></div>
     <?= $content ?>
 
     <footer>Tout droit réservés Jean Forteroche &copy; &mdash; <a href="/admin"> Admin</a></footer>

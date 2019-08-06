@@ -23,7 +23,7 @@ function error(message, nmb) {
         new Noty({
             type: 'error',
             text: message,
-            timeout: 3000
+            timeout: 5000
         }).show();
     }
 }
@@ -33,17 +33,19 @@ function success(message, nmb) {
         new Noty({
             type: 'success',
             text: message,
-            timeout: 3000
+            timeout: 5000
         }).show();
     }
 }
 
 error('Merci de renseigner tous les champs demandés', 1);
 error('Le nom d\'utilisateur ou email que vous avez renseigné existe déjà.', 2);
-error('Aucun compte ne correspond à votre addresse mail. Merci d\'en renseigner un autre.');
+error('Aucun compte ne correspond à votre addresse mail. Merci d\'en renseigner un autre.', 3);
+error('Le mot de passe ou nom d\'utilisateur est incorrect', 4);
 
 success('Merci, un email vous a été envoyer avec un lien d\'activation', 1);
 success('Votre mot de passe à été mis à jour avec succès', 2);
+success('Merci, vous pouvez maintenez vous connecter à votre compte', 3)
 
 
 

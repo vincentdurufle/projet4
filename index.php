@@ -2,65 +2,85 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-require_once('./controller/controller.php');
-require_once('./controller/userController.php');
-require_once('./controller/editController.php');
+
+function controller ($controller, $fn) {
+    if($controller == 'chapter') {
+        $controller = new ChapterController();
+        $controller->$fn();
+    } elseif($controller == 'comment') {
+        $controller = new CommentController();
+        $controller->$fn();
+    } elseif($controller == 'helpers') {
+        $controller = new Manager();
+        $controller->$fn();
+    } elseif($controller == 'user') {
+        $controller = new UserController();
+        $controller->$fn();
+    }
+}
+
+require('./controller/ChapterController.php');
+require('./controller/CommentController.php');
+require('./controller/UserController.php');
 
 $request_uri = explode('?', $_SERVER['REQUEST_URI'], 2);
 
 if ($request_uri[0] == '/') {
-    showChapters();
+    controller('chapter', 'showChaptersHome');
+} elseif($request_uri[0] == '/chapitres') {
+    controller('chapter', 'showChapters');
 } elseif ($request_uri[0] == '/admin') {
-    loginAdminPage();
+    controller('user', 'loginAdminPage');
 } elseif ($request_uri[0] == '/chapitre/') {
-    post();
+    controller('chapter', 'post');
 } elseif ($request_uri[0] == '/checkAdmin') {
-    loginAdmin();
+    controller('user', 'loginAdmin');
 } elseif ($request_uri[0] == '/addChapter') {
-    addChapterView();
+    controller('chapter', 'addChapterView');
 } elseif ($request_uri[0] == '/postChapter') {
-    addChapter();
+    controller('chapter', 'addChapter');
 } elseif ($request_uri[0] == '/updateChapter') {
-    showTitles();
+    controller('chapter', 'showTitles');
 } elseif ($request_uri[0] == '/updateChapter/') {
-    showChapter();
+    controller('chapter', 'showChapter');
 } elseif ($request_uri[0] == '/updateChapterData/') {
-    updateChapter();
-    post();
+    $controller = new ChapterController();
+    $controller->updateChapter();
+    $controller->post();
 } elseif ($request_uri[0] == '/deleteChapter/') {
-    deleteChapter();
+    controller('chapter', 'deleteChapter');
 } elseif ($request_uri[0] == '/moderate') {
-    showComments();
+    controller('comment', 'showComments');
 } elseif ($request_uri[0] == '/deleteComment/') {
-    deleteComment();
+    controller('comment', 'deleteComment');
 } elseif ($request_uri[0] == '/disconnect') {
-    disconnect();
+    controller('user', 'disconnect');
 } elseif ($request_uri[0] == '/login') {
-    loginUserPage();
+    controller('user', 'loginUserPage');
 } elseif ($request_uri[0] == '/create') {
-    createUser();
+    controller('user', 'createUser');
 } elseif ($request_uri[0] == '/verify/') {
-    verifyUser();
+    controller('user', 'verifyUser');
 } elseif ($request_uri[0] == '/loginUser') {
-    loginUser();
+    controller('user', 'loginUser');
 } elseif ($request_uri[0] == '/picture') {
-    addImagePage();
+    controller('user', 'addImagePage');
 } elseif ($request_uri[0] == '/upload') {
-    addImage();
+    controller('user', 'addImage');
 } elseif ($request_uri[0] == '/addComment/') {
-    addCommentPage();
+    controller('comment', 'addCommentPage');
 } elseif ($request_uri[0] == '/addCommentData/') {
-    addComment();
+    controller('comment', 'addComment');
 } elseif ($request_uri[0] == '/report/') {
-    reportComment();
+    controller('comment', 'reportComment');
 } elseif ($request_uri[0] == '/password') {
-    updatePasswordPage();
+    controller('user', 'updatePasswordPage');
 } elseif ($request_uri[0] == '/updatepassword') {
-    updatePassword();
+    controller('user', 'updatePassword');
 } elseif ($request_uri[0] == '/reset/') {
-    resetPage();
+    controller('user', 'resetPage');
 } elseif ($request_uri[0] == '/resetPassword/') {
-    resetPassword();
+   controller('user', 'resetPassword');
 } else {
-    error();
+    controller('helpers', 'error');
 }
