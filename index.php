@@ -3,6 +3,16 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+function autoload($class)
+{
+    if (preg_match('/Controller/', $class)) {
+        require './controller/' . $class . '.php';
+    } else {
+        require './model/' . $class . '.php';
+    }
+}
+spl_autoload_register('autoload');
+
 function controller ($controller, $fn) {
     if($controller == 'chapter') {
         $controller = new ChapterController();
@@ -19,9 +29,6 @@ function controller ($controller, $fn) {
     }
 }
 
-require('./controller/ChapterController.php');
-require('./controller/CommentController.php');
-require('./controller/UserController.php');
 
 $request_uri = explode('?', $_SERVER['REQUEST_URI'], 2);
 

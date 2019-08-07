@@ -1,13 +1,4 @@
 <?php
-function autoload($class)
-{
-    if (preg_match('#^Swift_#', $class)) {
-        require './vendor/autoload.php';
-    } else {
-        require './model/' . $class . '.php';
-    }
-}
-spl_autoload_register('autoload');
 
 
 class UserController extends Manager {

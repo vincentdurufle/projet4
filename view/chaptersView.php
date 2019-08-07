@@ -11,7 +11,7 @@
                     <span><?= $this->get_time_ago(strtotime($data['date_creation']))  ?> </span>
                     
                 </div>
-                <p> <?= $data['content'] ?> </p>
+                <p> <?= addslashes($data['content']) ?> </p>
                 <a href="/chapitre/?id=<?= htmlspecialchars($data['id']) ?>">Commentaires</a>
 
             </div>
