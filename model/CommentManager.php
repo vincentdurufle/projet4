@@ -2,6 +2,11 @@
 
 class CommentManager extends Manager
 {
+    /**
+     * gets all data from comments column in db
+     *@param int $_GET['id']
+     * @return array
+     */
     public function getComments()
     {
         $db = $this->dbConnect();
@@ -11,6 +16,11 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    /**
+     * gets all comments from name column in db
+     * @param string $_GET['username']
+     * @return array
+     */
     public function getCommentsUser()
     {
         $db = $this->dbConnect();
@@ -20,15 +30,24 @@ class CommentManager extends Manager
         return $comments;
     }
 
+    /**
+     * gets all comments from name column in db sorted by report=0 or 1
+     * @return array
+     */
     public function getCommentsAdmin()
     {
         $db = $this->dbConnect();
         $comments = $db->query('SELECT * FROM comments WHERE report = 0 ORDER BY date_creation DESC');
         $reports = $db->query('SELECT * FROM comments WHERE report = 1 ORDER BY date_creation DESC');
-        
+
         return array($comments, $reports);
     }
 
+        /**
+     * add comment in db
+     * @param object $comment
+     * @return void
+     */
     public function add(Comment $comment)
     {
         $db = $this->dbConnect();
@@ -38,25 +57,37 @@ class CommentManager extends Manager
         $new->bindValue(':content', $comment->content());
         $new->bindValue(':name', $comment->name());
         $new->bindValue(':img', $comment->img());
-        
+
         $new->execute();
     }
 
+
+    /**
+     * delete comment in db with id
+     * @param int $_GET['id']
+     * @return void
+     */
     public function delete()
     {
         $db = $this->dbConnect();
-        
+
         $deleteChapter = $db->prepare('DELETE FROM comments WHERE id = :id');
         $deleteChapter->bindValue(':id', $_GET['id']);
         $deleteChapter->execute();
     }
 
-    public function report() {
+    /**
+     * sets report=0 in db with id
+     * @param int $_GET['id']
+     * @return void
+     */
+    public function report()
+    {
         $db = $this->dbConnect();
 
         $req = $db->prepare('UPDATE comments SET report = 1 WHERE id = :id');
         $req->bindValue(':id', $_GET['id']);
         $req->execute();
-        header('Location: /chapitre/?id='.$_GET['chapterid'].'');
+        header('Location: /chapitre/?id=' . $_GET['chapterid'] . '');
     }
 }

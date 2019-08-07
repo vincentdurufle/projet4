@@ -19,12 +19,12 @@ if (!isset($_SESSION['username'])) {
             while ($report = $reports->fetch()) {
                 ?>
                 <p class='title'>
-                    <strong><?= $report['name'] ?></strong>
+                    <strong><?= htmlspecialchars($report['name']) ?></strong>
                     <span><?= $this->get_time_ago(strtotime($report['date_creation']))  ?></span>
                 </p>
                 <div class="comment-content">
-                    <?= nl2br($report['content']) ?>
-                    <a class="delete" href="/deleteComment/?id=<?= $report['id'] ?>">X</a>
+                    <?= htmlspecialchars($report['content']) ?>
+                    <a class="delete" href="/deleteComment/?id=<?= htmlspecialchars($report['id']) ?>">X</a>
                 </div>
             <?php
             }

@@ -29,12 +29,26 @@
                 <div class="menu-list-container">
                     <li><a href="/">Accueil</a> </li>
                     <li><a href="/chapitres">Chapitres</a></li>
-                    <?php if (isset($_SESSION['username']) && $_SESSION['username'] != 'admin' ){
-                        echo '<li class="profile"><a class="profile-username" href="/login"><img class="profile-picture" src="/public/img/' . $_SESSION['img'] . '" alt="photo de profile">' . $_SESSION['username'] . '</a></li>';
+                    <?php if (isset($_SESSION['username']) && $_SESSION['username'] != 'admin') {
+                        ?>
+                        <li class="profile">
+                            <a class="profile-username" href="/login">
+                                <img class="profile-picture" src="/public/img/<?= htmlspecialchars($_SESSION['img']) ?>" alt="photo de profile"> <?= htmlspecialchars($_SESSION['username']) ?>
+                            </a>
+                        </li>
+                    <?php
                     } elseif (isset($_SESSION['username']) && $_SESSION['username'] == 'admin') {
-                        echo '<li class="profile"><a class="profile-username" href="/admin"><img class="profile-picture" src="/public/img/' . $_SESSION['img'] . '" alt="photo de profile">' . $_SESSION['username'] . '</a></li>';
+                        ?>
+                        <li class="profile">
+                            <a class="profile-username" href="/login">
+                                <img class="profile-picture" src="/public/img/<?= htmlspecialchars($_SESSION['img']) ?>" alt="photo de profile"> <?= htmlspecialchars($_SESSION['username']) ?>
+                            </a>
+                        </li>
+                    <?php
                     } else {
-                        echo '<li><a href="/login">Connexion</a></li>';
+                        ?>
+                        <li><a href="/login">Connexion</a></li>'
+                    <?php
                     }
                     ?>
                 </div>

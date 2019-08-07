@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Sets a user entity to be loaded in Manager
+ */
+
 class User
 {
     private $id;
@@ -14,6 +18,14 @@ class User
         $this->hydrate($data);
     }
 
+ /**
+   * loop through all setters
+   *
+   * @param string 
+   * @param int
+   * @return void
+   */
+
     public function hydrate($data)
     {
         foreach ($data as $key => $value) {
@@ -25,30 +37,66 @@ class User
         }
     }
 
+    /**
+   * sets id
+   *
+   * @param int $id
+   * @return void
+   */
     public function setId($id)
     {
         $this->id = (int) $id;
     }
+    /**
+   * sets username
+   *
+   * @param string $username
+   * @return void
+   */
     public function setUsername($username)
     {
         $this->username = $username;
     }
 
+    /**
+   * transform string to hash
+   *
+   * @param string $password
+   * @return void
+   */
     public function setPassword($password)
     {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
+    /**
+   * sets email
+   *
+   * @param string $email
+   * @return void
+   */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
+    /**
+   * sets token with a int param setting the length
+   *
+   * @param int $token
+   * @return void
+   */
     public function setToken($token)
     {
         $this->token = bin2hex(random_bytes($token));
     }
 
+    /**
+   * sets active 1 or 0
+   *
+   * @param int $active
+   * @return void
+   */
     public function setActive($active)
     {
         $this->active = $active;

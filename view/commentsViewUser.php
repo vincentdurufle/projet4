@@ -18,12 +18,12 @@ if (!isset($_SESSION['username'])) {
             while ($comment = $comments->fetch()) {
                 ?>
                 <p class='title'>
-                    <strong><?= $comment['name'] ?></strong>
+                    <strong><?= htmlspecialchars($comment['name']) ?></strong>
                     <span><?= $this->get_time_ago(strtotime($comment['date_creation']))  ?></span>
                 </p>
                 <div class="comment-content">
-                    <?= nl2br($comment['content']) ?>
-                    <a class="delete" href="/deleteComment/?id=<?= $comment['id'] ?>">X</a>
+                    <?= htmlspecialchars($comment['content']) ?>
+                    <a class="delete" href="/deleteComment/?id=<?= htmlspecialchars($comment['id']) ?>">X</a>
                 </div>
             <?php
             }

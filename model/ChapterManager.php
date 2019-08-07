@@ -2,7 +2,12 @@
 require_once('./model/Manager.php');
 
 class ChapterManager extends Manager
-{
+{   
+    /**
+   * gets all data from chapters
+   *
+   * @return array
+   */
     public function getChapters()
     {
         $db = $this->dbConnect();
@@ -10,6 +15,11 @@ class ChapterManager extends Manager
         return $chapters;
     }
 
+    /**
+   * gets all data from selected chapter with id
+   * @param int $_GET['id]
+   * @return array
+   */
     public function getChapter()
     {
         $db = $this->dbConnect();
@@ -20,6 +30,11 @@ class ChapterManager extends Manager
         return $post;
     }
 
+    /**
+   * adds preformated chapter to db
+   * @param object $chapter
+   * @return void
+   */
     public function add(Chapter $chapter)
     {
         $db = $this->dbConnect();
@@ -32,6 +47,11 @@ class ChapterManager extends Manager
         header('Location: /admin');
     }
 
+    /**
+   * updates preformated chapter to db
+   * @param object $chapter
+   * @return void
+   */
     public function update(Chapter $chapter)
     {
         $db = $this->dbConnect();
@@ -44,6 +64,11 @@ class ChapterManager extends Manager
         $req->execute();
     }
 
+    /**
+   * delete a column in chapters db
+   * @param object $chapter
+   * @return void
+   */
     public function delete(Chapter $chapter)
     {
         $db = $this->dbConnect();

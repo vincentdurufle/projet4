@@ -5,7 +5,12 @@ require_once('./model/Manager.php');
 class UserManager extends Manager
 {
     private $imgName;
-
+    /**
+     * query data from user with username if account is active and verifies password
+     * @param string $_POST['username']
+     * @param string $_POST['password']
+     * @return void
+     */
     public function checkUser()
     {
         $db = $this->dbConnect();
@@ -31,6 +36,11 @@ class UserManager extends Manager
         }
     }
 
+    /**
+     * inserts new user in db from object and sends email
+     * @param object $user
+     * @return void
+     */
     public function createUser(User $user)
     {
         $db = $this->dbConnect();
@@ -72,6 +82,12 @@ class UserManager extends Manager
 
     }
 
+    /**
+     * sets active column in user to 1
+     * @param string $_GET['email']
+     * @param int $_GET['token']
+     * @return void
+     */
     public function activateUser()
     {
         $db = $this->dbConnect();
@@ -85,6 +101,12 @@ class UserManager extends Manager
         }
     }
 
+    /**
+     * updates token of user in db and sends email
+     * @param string $_GET['email']
+     * @param string $_GET['token']
+     * @return void
+     */
     public function update(User $user) {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT email, token FROM users WHERE email = :email AND active = "1"');
@@ -117,6 +139,12 @@ class UserManager extends Manager
         }
     }
 
+    /**
+     * updates password of user
+     * @param object $user
+     * @param string $_GET['token']
+     * @return void
+     */
     public function reset(User $user) {
         $db = $this->dbConnect();
 
@@ -138,6 +166,11 @@ class UserManager extends Manager
         } 
     }
 
+    /**
+     * upload an image, rename it, resizes it and moves it to publc/img folder
+     * @param array $_FILES
+     * @return void
+     */
     public function addImage()
     {
         $file = $_FILES['image']['tmp_name'];
@@ -181,6 +214,14 @@ class UserManager extends Manager
                 break;
         }
     }
+
+    /**
+     * resize an img
+     * @param string $imageresourceid 
+     * @param int $width
+     * @param int $height
+     * @return img
+     */
     public function imageResize($imageResourceId, $width, $height)
     {
         $targetWidth = 200;
@@ -203,6 +244,12 @@ class UserManager extends Manager
         return $this->imgName;
     }
 
+    /**
+     * updates img column of user and comments where there is user
+     * @param string $_SESSION['username']
+     * @param var $this->imgName
+     * @return void
+     */
     public function userImgName()
     {
         $db = $this->dbConnect();

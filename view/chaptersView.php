@@ -12,7 +12,7 @@
                     
                 </div>
                 <p> <?= $data['content'] ?> </p>
-                <a href="/chapitre/?id=<?= $data['id'] ?>">Commentaires</a>
+                <a href="/chapitre/?id=<?= htmlspecialchars($data['id']) ?>">Commentaires</a>
 
             </div>
         <?php

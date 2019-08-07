@@ -15,14 +15,14 @@
         while ($comment = $comments->fetch()) {
             ?>
             <p class='title'>
-                <img class="picture-comment" src="/public/img/<?= $comment['img'] ?>" alt="">
+                <img class="picture-comment" src="/public/img/<?= htmlspecialchars($comment['img']) ?>" alt="">
                 <strong><?= htmlspecialchars($comment['name']) ?></strong>
                 <span><?= $this->get_time_ago(strtotime($comment['date_creation'])) ?></span>
 
             </p>
             <div class="comment-content">
-                <?= nl2br($comment['content']) ?>
-                <a href="/report/?id=<?= $comment['id'] ?>&chapterid=<?= $post['id'] ?>">Signaler</a>
+                <?= htmlspecialchars($comment['content']) ?>
+                <a href="/report/?id=<?= htmlspecialchars($comment['id']) ?>&chapterid=<?= htmlspecialchars($post['id']) ?>">Signaler</a>
             </div>
         <?php
         }
@@ -30,7 +30,7 @@
             echo '<p>Il n\'y a pas de commentaire, soyez le premier !</p>';
         }
         ?>
-        <a href="/addComment/?id=<?= $_GET['id'] ?>">Ajouter un commentaire</a>
+        <a href="/addComment/?id=<?= htmlspecialchars($_GET['id']) ?>">Ajouter un commentaire</a>
     </div>
 </section>
 <?php $content = ob_get_clean() ?>

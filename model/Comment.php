@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * sets a Comment entity to be after loaded in manager
+ * @param int
+ * @param string
+ * @return object
+ */
+
 class Comment
 {
     private $chapter_id;
@@ -11,6 +18,13 @@ class Comment
     {
         $this->hydrate($data);
     }
+    /**
+     * loop through all setters
+     *
+     * @param string 
+     * @param int
+     * @return void
+     */
 
     public function hydrate($data)
     {
@@ -22,23 +36,42 @@ class Comment
             }
         }
     }
-
+    /**
+     * sets id
+     *
+     * @param int $chapter_id
+     * @return void
+     */
     public function setChapter_Id($chapter_id)
     {
         $this->chapter_id = $chapter_id;
     }
-
+    /**
+     *
+     * @param string $name
+     * @return void
+     */
     public function setname($name)
     {
 
         $this->name = $name;
     }
+
+    /**
+     * @param string $content
+     * @return void
+     */
     public function setContent($content)
     {
         $this->content = $content;
     }
 
-    public function setImg($img) {
+    /**
+     * @param string $img
+     * @return void
+     */
+    public function setImg($img)
+    {
         $this->img = $img;
     }
 
@@ -56,7 +89,7 @@ class Comment
     {
         return $this->content;
     }
-    public function img() 
+    public function img()
     {
         return $this->img;
     }

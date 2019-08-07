@@ -1,19 +1,33 @@
 <?php
+
+/**
+ * helpers class to extends to managers and controllers
+ */
 class Manager
 {
+    /**
+     * connects to database
+     * @return PDO $db
+     */
     public function dbConnect()
     {
         try {
             $db = new PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'root', '');
-            // $db = new PDO('mysql:host=localhost;dbname=vincdgfq_projet4', 'vincdgfq_vince', 'vincent$12');
+            // $db = new PDO('mysql:host=localhost;dbname=vincdgfq_projet4;charset=utf8', 'vincdgfq_vince', 'vincent$12');
         } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();
         }
         return $db;
     }
 
+    /**
+     * calculates a timedate from db with current time
+     * @param int $time
+     * @param fn time()
+     * @return string
+     */
     public function get_time_ago($time)
-    {   
+    {
         date_default_timezone_set('Europe/Paris');
         $time_difference = time() - $time;
 
@@ -38,15 +52,27 @@ class Manager
             }
         }
     }
-    
-    public function render($path, $var) {
-        foreach($var as $key => $value) {
+
+    /**
+     * render view from path with array(s) of var
+     * @param string $path
+     * @param array $var
+     * @return php
+     */
+    public function render($path, $var)
+    {
+        foreach ($var as $key => $value) {
             $$key = $value;
         }
-        require('./view/'.$path.'.php');
+        require('./view/' . $path . '.php');
     }
 
-    public function error() {
+    /**
+     * render 404 page
+     * @return php
+     */
+    public function error()
+    {
         $this->render('404', []);
     }
 }
