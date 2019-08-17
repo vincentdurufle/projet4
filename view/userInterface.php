@@ -1,6 +1,8 @@
 <?php
     if(!isset($_SESSION['username'])) {
         header('Location: /login');
+    } elseif(isset($_SESSION['username']) && $_SESSION['username'] == 'admin') {
+        header('Location: /admin');
     }
 ?>
 

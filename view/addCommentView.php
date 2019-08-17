@@ -7,7 +7,7 @@ if (!isset($_SESSION['username'])) {
 
 <section class="editor-container">
 
-    <form action="/addCommentData/?id=<?= addslashes(htmlspecialchars($_GET['id'])) ?>" method="post">
+    <form action="/addCommentData/?id=<?= htmlspecialchars($_GET['id']) ?>" method="post">
         <label for="editor_content">Commentaire</label>
         <textarea name="editor_content" id="editor"></textarea>
         <input type="submit" value="Envoyer">

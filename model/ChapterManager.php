@@ -5,14 +5,15 @@ class ChapterManager extends Manager
 {   
     /**
    * gets all data from chapters
-   *
    * @return array
    */
     public function getChapters()
     {
         $db = $this->dbConnect();
-        $chapters = $db->query('SELECT id, title, content, date_creation FROM chapters ORDER BY date_creation DESC');
+        $chapters = $db->query('SELECT id, title, content, date_creation FROM chapters ORDER BY date_creation ASC');
         return $chapters;
+
+        $db = null;
     }
 
     /**
@@ -24,10 +25,12 @@ class ChapterManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, title, content, date_creation FROM chapters WHERE id = :id');
-        $req->execute(array(':id' => $_GET['id']));
+        $req->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+        $req->execute();
         $post = $req->fetch();
 
         return $post;
+        $db = null;
     }
 
     /**
@@ -44,6 +47,7 @@ class ChapterManager extends Manager
         $req->bindValue(':content', $chapter->content());
 
         $req->execute();
+        $db = null;
         header('Location: /admin');
     }
 
@@ -62,6 +66,7 @@ class ChapterManager extends Manager
         $req->bindValue(':id', $chapter->id());
 
         $req->execute();
+        $db = null;
     }
 
     /**
@@ -87,5 +92,6 @@ class ChapterManager extends Manager
             $deleteChapter->execute();
         }
         header('Location: /updateChapter');
+        $db = null;
     }
 }

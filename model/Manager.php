@@ -12,8 +12,8 @@ class Manager
     public function dbConnect()
     {
         try {
-            $db = new PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'root', '');
-            // $db = new PDO('mysql:host=localhost;dbname=vincdgfq_projet4;charset=utf8', 'vincdgfq_vince', 'vincent$12');
+            // $db = new PDO('mysql:host=localhost;dbname=projet4;charset=utf8', 'root', '');
+            $db = new PDO('mysql:host=localhost;dbname=vincdgfq_projet4;charset=utf8', 'vincdgfq_vince', 'vincent$12');
         } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();
         }

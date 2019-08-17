@@ -11,9 +11,11 @@ class CommentManager extends Manager
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('SELECT id, name, content, date_creation, img FROM comments WHERE chapter_id = :id ORDER BY date_creation DESC');
-        $comments->execute(array(':id' => $_GET['id']));
+        $comments->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+        $comments->execute();
 
         return $comments;
+        $db = null;
     }
 
     /**
@@ -25,9 +27,11 @@ class CommentManager extends Manager
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('SELECT id, name, content, date_creation FROM comments WHERE name = :name ORDER BY date_creation DESC');
-        $comments->execute(array(':name' => $_SESSION['username']));
+        $comments->bindValue(':name', $_SESSION['username'], PDO::PARAM_STR);
+        $comments->execute();
 
         return $comments;
+        $db = null;
     }
 
     /**
@@ -41,6 +45,7 @@ class CommentManager extends Manager
         $reports = $db->query('SELECT * FROM comments WHERE report = 1 ORDER BY date_creation DESC');
 
         return array($comments, $reports);
+        $db = null;
     }
 
         /**
@@ -59,6 +64,7 @@ class CommentManager extends Manager
         $new->bindValue(':img', $comment->img());
 
         $new->execute();
+        $db = null;
     }
 
 
@@ -72,8 +78,9 @@ class CommentManager extends Manager
         $db = $this->dbConnect();
 
         $deleteChapter = $db->prepare('DELETE FROM comments WHERE id = :id');
-        $deleteChapter->bindValue(':id', $_GET['id']);
+        $deleteChapter->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
         $deleteChapter->execute();
+        $db = null;
     }
 
     /**
@@ -86,8 +93,9 @@ class CommentManager extends Manager
         $db = $this->dbConnect();
 
         $req = $db->prepare('UPDATE comments SET report = 1 WHERE id = :id');
-        $req->bindValue(':id', $_GET['id']);
+        $req->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
         $req->execute();
+        $db = null;
         header('Location: /chapitre/?id=' . $_GET['chapterid'] . '');
     }
 }

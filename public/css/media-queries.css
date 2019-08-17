@@ -12,30 +12,39 @@
         height: 100%;
         position: relative;
         margin: 0;
+        padding: 0;
     }
 
     .menu-list-container {
         display: none;
-        justify-content: space-evenly;   
-        align-items: center;
+        -webkit-box-pack: space-evenly;
+            -ms-flex-pack: space-evenly;
+                justify-content: space-evenly;   
+        -webkit-box-align: center;   
+            -ms-flex-align: center;   
+                align-items: center;
         width: 100%;
-        margin-top: 35px;
     }
     .menu-list-container li {
+        margin-top: 35px;
         text-align: center;
-        flex: unset;
+        -webkit-box-flex: unset;
+            -ms-flex: unset;
+                flex: unset;
         font-weight: bold;
     }
 
-    .menu ul:first-child {
+    .menu div:first-child {
         padding-left: 0px;
     }
 
-    .menu ul li:first-child {
-        flex: unset;
+    .menu div:first-child {
+        -webkit-box-flex: unset;
+            -ms-flex: unset;
+                flex: unset;
         
     }
-    .menu ul i {
+    .menu i {
         display: block;
         cursor: pointer;
         font-size: 150%;
@@ -72,7 +81,10 @@
     }
 
     .login-container {
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
     }
 
     .interface {
@@ -83,9 +95,15 @@
         max-width: 100%;
         width: 100%;
         padding: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
     }
 
     .editor-container form {

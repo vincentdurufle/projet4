@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:400,700%7CRaleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="/public/css/normalize.css">
     <link rel="stylesheet" href="/public/css/media-queries.css">
@@ -17,38 +17,36 @@
 <body>
     <section class="header">
         <nav class="menu">
-            <ul>
-                <li>
-                    <h2><a href="/">Jean Forteroche</a></h2>
-                </li>
-                <div class="menu-list-container">
-                    <li><a href="/">Accueil</a> </li>
-                    <li><a href="/chapitres">Chapitres</a></li>
-                    <?php if (isset($_SESSION['username']) && $_SESSION['username'] != 'admin') {
-                        ?>
-                        <li class="profile">
-                            <a class="profile-username" href="/login">
-                                <img class="profile-picture" src="/public/img/<?= htmlspecialchars($_SESSION['img']) ?>" alt="photo de profile"> <?= htmlspecialchars($_SESSION['username']) ?>
-                            </a>
-                        </li>
-                    <?php
-                    } elseif (isset($_SESSION['username']) && $_SESSION['username'] == 'admin') {
-                        ?>
-                        <li class="profile">
-                            <a class="profile-username" href="/login">
-                                <img class="profile-picture" src="/public/img/<?= htmlspecialchars($_SESSION['img']) ?>" alt="photo de profile"> <?= htmlspecialchars($_SESSION['username']) ?>
-                            </a>
-                        </li>
-                    <?php
-                    } else {
-                        ?>
-                        <li><a href="/login">Connexion</a></li>'
-                    <?php
-                    }
+            <div>
+                <h2><a href="/">Jean Forteroche</a></h2>
+            </div>
+            <ul class="menu-list-container">
+                <li><a href="/">Accueil</a> </li>
+                <li><a href="/chapitres">Chapitres</a></li>
+                <?php if (isset($_SESSION['username']) && $_SESSION['username'] != 'admin') {
                     ?>
-                </div>
-                <i class="fas fa-bars"></i>
+                    <li class="profile">
+                        <a class="profile-username" href="/login">
+                            <img class="profile-picture" src="/public/img/<?= htmlspecialchars($_SESSION['img']) ?>" alt="photo de profile"> <?= htmlspecialchars($_SESSION['username']) ?>
+                        </a>
+                    </li>
+                <?php
+                } elseif (isset($_SESSION['username']) && $_SESSION['username'] == 'admin') {
+                    ?>
+                    <li class="profile">
+                        <a class="profile-username" href="/login">
+                            <img class="profile-picture" src="/public/img/<?= htmlspecialchars($_SESSION['img']) ?>" alt="photo de profile"> <?= htmlspecialchars($_SESSION['username']) ?>
+                        </a>
+                    </li>
+                <?php
+                } else {
+                    ?>
+                    <li><a href="/login">Connexion</a></li>
+                <?php
+                }
+                ?>
             </ul>
+            <i class="fas fa-bars"></i>
         </nav>
         <h1>Billet simple pour l'Alaska</h1>
         <h4>Le prochain livre de Jean Forteroche</h4>
@@ -65,7 +63,7 @@
                     <span><?= $this->get_time_ago(strtotime($data['date_creation']))  ?> </span>
 
                 </div>
-                <p> <?= $data['content'] ?> </p>
+                <div><?= $data['content'] ?></div>
                 <a href="/chapitre/?id=<?= htmlspecialchars($data['id']) ?>">Commentaires</a>
 
             </div>

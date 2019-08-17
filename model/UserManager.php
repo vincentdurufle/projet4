@@ -15,7 +15,8 @@ class UserManager extends Manager
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT username, password, img FROM users WHERE username = :username AND active = "1"');
-        $req->execute(array(':username' => $_POST['username']));
+        $req->bindValue(':username', $_POST['username'], PDO::PARAM_STR);
+        $req->execute();
 
         $result = $req->fetch();
 
@@ -23,17 +24,18 @@ class UserManager extends Manager
 
 
         if (!$result && $_POST['username'] == 'admin') {
-            header('Location: /loginAdmin?err=$err');
+            header('Location: /admin?err=4');
         } elseif (!$result && $_POST['username']  != 'admin') {
-            header('Location: /loginUser?err=$err');
+            header('Location: /login?err=4');
         } else {
             if ($isPasswordCorrect) {
                 $_SESSION['username'] = $_POST['username'];
                 $_SESSION['img'] = $result['img'];
             } elseif (!$isPasswordCorrect) {
-                header('Location: /loginUser/?err=$err');
+                header('Location: /login?err=4');
             }
         }
+        $db = null;
     }
 
     /**
@@ -44,7 +46,7 @@ class UserManager extends Manager
     public function createUser(User $user)
     {
         $db = $this->dbConnect();
-        
+
         $check = $db->prepare('SELECT username, email FROM users WHERE username = :username OR email = :email');
         $check->bindValue(':username', $user->username());
         $check->bindValue(':email', $user->email());
@@ -52,7 +54,7 @@ class UserManager extends Manager
         $check->execute();
         $res = $check->fetch();
 
-        if($res) {
+        if ($res) {
             header('Location: /login?err=2');
         } else {
             $req = $db->prepare('INSERT INTO users (username, password, email, token) VALUES(:username, :password, :email, :token)');
@@ -60,26 +62,43 @@ class UserManager extends Manager
             $req->bindValue(':password', $user->password());
             $req->bindValue(':email', $user->email());
             $req->bindValue(':token', $user->token());
-    
+
             $req->execute();
-    
+
             $to = $user->email();
             $subject = 'Vérification d\'email';
             $message = '
-        Merci de vous être inscrit au site de Jean Forteroche.
-    
-        Veuillez maintenant valider votre addresse mail pour utiliser votre compte 
-        en cliquant sur ce lien : 
-        https://projet4.vincentdurufle.com/verify/?email=' . $user->email() . '&token=' . $user->token() . '
-        ';
+            <html>
+            <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <title></title>
+            </head>
+            <body>
+                <div style="background: #5b6a89;color: #FFF; height: 100%; width: 100%;" >
+                <div style="margin: 20px;">
+                    <p>Bonjour,</p><br>
+                    <p>Merci de vous être inscrit au site de Jean Forteroche.</p><br>
+                    <p>Veuillez maintenant valider votre addresse mail pour utiliser votre compte en cliquant sur ce lien : </p>
+                    <a href="https://projet4.vincentdurufle.com/verify/?email=' . $user->email() . '&token=' . $user->token() . '">Activez votre compte</a>
+                </div>
+                </div>
+            </body>
+            </html>
+            ';
+            // '
+            // Merci de vous être inscrit au site de Jean Forteroche.
+
+            // Veuillez maintenant valider votre addresse mail pour utiliser votre compte 
+            // en cliquant sur ce lien : 
+            //     <a href="https://projet4.vincentdurufle.com/verify/?email=' . $user->email() . '&token=' . $user->token() . '">Activez votre compte</a>
+            // ';
             $headers = 'From:noreply@projet4.vincentdurufle.com' . "\r\n";
-            $headers .= 'Content-Type: text/plain; charset="utf-8"' . " ";
+            $headers .= 'Content-Type: text/html; charset="utf-8"' . " ";
             mail($to, $subject, $message, $headers);
-    
-    
+
+            $db = null;
             header('Location: /login?success=1');
         }
-
     }
 
     /**
@@ -99,6 +118,7 @@ class UserManager extends Manager
             $update->execute(array($_GET['email'], $_GET['token']));
             header('Location: /login?success=3');
         }
+        $db = null;
     }
 
     /**
@@ -107,18 +127,19 @@ class UserManager extends Manager
      * @param string $_GET['token']
      * @return void
      */
-    public function update(User $user) {
+    public function update(User $user)
+    {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT email, token FROM users WHERE email = :email AND active = "1"');
         $req->execute(array(':email' => $user->email()));
 
-        
+
         $res = $req->fetch();
-        if($res) {
+        if ($res) {
             $token = $db->prepare('UPDATE users SET token = :token WHERE email = :email');
             $token->bindValue(':email', $user->email());
             $token->bindValue(':token', $user->token());
-    
+
             $token->execute();
 
             $to = $user->email();
@@ -130,13 +151,14 @@ class UserManager extends Manager
         https://projet4.vincentdurufle.com/reset/?email=' . $user->email() . '&token=' . $user->token() . '
         ';
             $headers = 'From:noreply@projet4.vincentdurufle.com' . "\r\n";
-            $headers .= 'Content-Type: text/plain; charset="utf-8"' . " ";
+            $headers .= 'Content-Type: text/html; charset="utf-8"' . " ";
             mail($to, $subject, $message, $headers);
 
             header('Location: /password?success=1');
         } else {
             header('Location: /password?err=3');
         }
+        $db = null;
     }
 
     /**
@@ -145,7 +167,8 @@ class UserManager extends Manager
      * @param string $_GET['token']
      * @return void
      */
-    public function reset(User $user) {
+    public function reset(User $user)
+    {
         $db = $this->dbConnect();
 
         $req = $db->prepare('SELECT email, token FROM users WHERE email = :email AND token = :token');
@@ -154,7 +177,7 @@ class UserManager extends Manager
         $req->execute();
 
         $res = $req->fetch();
-        if($res) {
+        if ($res) {
             $update = $db->prepare('UPDATE users SET token = :token, password = :password WHERE email = :email');
             $update->bindValue(':token', $user->token());
             $update->bindValue(':password', $user->password());
@@ -163,7 +186,8 @@ class UserManager extends Manager
             $update->execute();
 
             header('Location: /login?success=2');
-        } 
+        }
+        $db = null;
     }
 
     /**
@@ -213,6 +237,7 @@ class UserManager extends Manager
                 exit;
                 break;
         }
+        $db = null;
     }
 
     /**
@@ -267,5 +292,6 @@ class UserManager extends Manager
 
         $_SESSION['img'] = $this->imgName;
         header('Location: /login');
+        $db = null;
     }
 }

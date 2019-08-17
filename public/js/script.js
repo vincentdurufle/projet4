@@ -51,10 +51,10 @@ function toggle() {
         menu.classList.remove('fa-bars');
         menu.classList.add('fa-times');
         document.querySelector('.menu-list-container').style.display = 'flex';
-        document.querySelector('.menu ul li h2').style.display = 'none';
+        document.querySelector('.menu div h2').style.display = 'none';
     } else {
         document.querySelector('.menu-list-container').style.display = 'none';
-        document.querySelector('.menu ul li h2').style.display = 'flex';
+        document.querySelector('.menu div h2').style.display = 'flex';
         menu.classList.add('fa-bars');
         menu.classList.remove('fa-times');
     }
