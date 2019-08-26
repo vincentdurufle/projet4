@@ -2,7 +2,7 @@
 <section class="login-container">
     <form action="/updatepassword" method="post">
         <h1>Mot de passe oublié</h1>
-        <input type="email" name="email" placeholder="Email">
+        <input type="email" name="email" placeholder="Email" required>
         <input type="submit" name="submit" placeholder="Envoyer">
     </form>
 </section>

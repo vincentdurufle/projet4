@@ -7,7 +7,7 @@
             ?>
             <div class="chapter">
                 <div class="title">
-                    <h2> <?= htmlspecialchars($data['title']) ?></h2>
+                    <h2><a href="/chapitre/?id=<?= htmlspecialchars($data['id']) ?>"><?= htmlspecialchars($data['title']) ?></a></h2>
                     <span><?= $this->get_time_ago(strtotime($data['date_creation']))  ?> </span>
                     
                 </div>

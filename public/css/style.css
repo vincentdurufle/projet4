@@ -64,7 +64,6 @@ input:focus {
         -ms-flex-direction: column;
             flex-direction: column;
     background-image: url(../img/background.jpg);
-    background-origin: center;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -86,19 +85,20 @@ nav,
         -ms-flex-align: center;
             align-items: center;
 }
+
+
 .menu-list-container {
     width: 40%;
 }
 .menu i {
     display: none;
     color: white;
+    z-index: 501;
 }
 
-nav div li {
-    -webkit-box-flex: 3;
-        -ms-flex: 3;
-            flex: 3;
-    text-align: center;
+.menu-list-container li a:hover {
+    font-weight: bold;
+    transition: 0.5s;
 }
 
 nav div:first-child {
@@ -126,13 +126,24 @@ nav a:visited {
     border-radius: 100%;
     margin: 15vh 0;
     font-size: 150%;
+    transition: 0.5s;
+}
+
+.fa-book:hover {
+    padding: 15px 30px;
+    border-radius: 0.25rem;
+    background-color: white;
+    color: var(--secondary);
+    transition: 0.5s ease-in-out;
+    border: 2px solid;
+
 }
 
 /* =================== */
 /* ===== CHAPTER ===== */
 /* =================== */
 
-.chapter-containers {
+.chapters-containers {
     color: white;
     min-height: calc(85vh - 27px);
 }
@@ -148,6 +159,7 @@ nav a:visited {
 .chapter p {
     line-height: 1.25;
 }
+
 .chapter a:link,
 .chapter a:visited {
     color: var(--secondary);
@@ -171,8 +183,15 @@ nav a:visited {
         -ms-flex-align: center;
             align-items: center;
 }
+
 .title h2 {
     margin: 0 20px;
+}
+
+.title a:link,
+.title a:visited {
+    text-decoration: none;
+    color: white;
 }
 .title span {
     font-style: italic;
@@ -208,10 +227,12 @@ nav a:visited {
 }
 .comments h2 {
     margin: 0 20px;
+    color: black;
 }
 
 .comments p {
     margin: 15px 0 0 0;
+    color: black;
 }
 
 .comments .title strong{
@@ -225,7 +246,7 @@ nav a:visited {
     text-decoration: none;
 }
 
-.comments a:hover {
+.comments a:hover:not(.delete) {
     border-bottom: 1px solid var(--third);
 }
 .comment-content {
@@ -249,9 +270,7 @@ nav a:visited {
     color: var(--secondary);
     font-size: 80%;
 }
-.comment-content a:hover {
-    border: none;
-}
+
 
 .picture-comment {
     border-radius: 50%;
@@ -476,10 +495,32 @@ nav a:visited {
     border-radius: 50px;
     padding: 10px;
     margin-top: 10px;
-    -webkit-box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
-            box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+            box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+            transition: 0.5s;
     
 }
+.login-container form input[type='submit']:hover {
+    box-shadow: 0px 7px 15px rgba(0,0,0,0.2);
+    transition: 0.5s;
+}
+.login-container form input[type=file] {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.upload {
+    background-color: white;
+    border-radius: 0.25rem;
+    padding: 10px 20px;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
 
 .login-container a:link,
 .login-container a:visited {
@@ -498,6 +539,7 @@ nav a:visited {
     -o-transition: 0.5s;
     transition: 0.5s;
 }
+
 
 /* ================== */
 /* ====== EDIT ====== */
@@ -555,6 +597,11 @@ nav a:visited {
     border: 2px solid white;
     border-radius: 50%;
     background-color: var(--third);
+}
+
+#editor-comment {
+    width: 100%;
+    margin-top: 10px;
 }
 
 /* ================== */

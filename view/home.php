@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <section class="header">
+    <div class="header">
         <nav class="menu">
             <div>
                 <h2><a href="/">Jean Forteroche</a></h2>
@@ -51,21 +51,18 @@
         <h1>Billet simple pour l'Alaska</h1>
         <h4>Le prochain livre de Jean Forteroche</h4>
         <a href="#chapter"><i class="fas fa-book"></i></a>
-    </section>
+    </div>
     <section class="chapters-container" id="chapter">
         <?php
         while ($data = $chapters->fetch()) {
-
             ?>
             <div class="chapter">
                 <div class="title">
-                    <h2> <?= htmlspecialchars($data['title']) ?></h2>
+                <h2><a href="/chapitre/?id=<?= htmlspecialchars($data['id']) ?>"><?= htmlspecialchars($data['title']) ?></a></h2>
                     <span><?= $this->get_time_ago(strtotime($data['date_creation']))  ?> </span>
-
                 </div>
                 <div><?= $data['content'] ?></div>
                 <a href="/chapitre/?id=<?= htmlspecialchars($data['id']) ?>">Commentaires</a>
-
             </div>
         <?php
         }

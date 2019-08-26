@@ -7,15 +7,15 @@ class UserManager extends Manager
     private $imgName;
     /**
      * query data from user with username if account is active and verifies password
-     * @param string $_POST['username']
+     * @param object $user
      * @param string $_POST['password']
      * @return void
      */
-    public function checkUser()
+    public function checkUser(User $user)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT username, password, img FROM users WHERE username = :username AND active = "1"');
-        $req->bindValue(':username', $_POST['username'], PDO::PARAM_STR);
+        $req->bindValue(':username', $user->username());
         $req->execute();
 
         $result = $req->fetch();
@@ -23,13 +23,13 @@ class UserManager extends Manager
         $isPasswordCorrect = password_verify($_POST['password'], $result['password']);
 
 
-        if (!$result && $_POST['username'] == 'admin') {
+        if (!$result && $user->username() == 'admin') {
             header('Location: /admin?err=4');
-        } elseif (!$result && $_POST['username']  != 'admin') {
+        } elseif (!$result && $user->username()  != 'admin') {
             header('Location: /login?err=4');
         } else {
             if ($isPasswordCorrect) {
-                $_SESSION['username'] = $_POST['username'];
+                $_SESSION['username'] = $user->username();
                 $_SESSION['img'] = $result['img'];
             } elseif (!$isPasswordCorrect) {
                 header('Location: /login?err=4');
@@ -68,30 +68,16 @@ class UserManager extends Manager
             $to = $user->email();
             $subject = 'Vérification d\'email';
             $message = '
-            <html>
-            <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                <title></title>
-            </head>
-            <body>
-                <div style="background: #5b6a89;color: #FFF; height: 100%; width: 100%;" >
-                <div style="margin: 20px;">
-                    <p>Bonjour,</p><br>
-                    <p>Merci de vous être inscrit au site de Jean Forteroche.</p><br>
-                    <p>Veuillez maintenant valider votre addresse mail pour utiliser votre compte en cliquant sur ce lien : </p>
-                    <a href="https://projet4.vincentdurufle.com/verify/?email=' . $user->email() . '&token=' . $user->token() . '">Activez votre compte</a>
-                </div>
-                </div>
-            </body>
-            </html>
-            ';
-            // '
-            // Merci de vous être inscrit au site de Jean Forteroche.
+            Merci de vous être inscrit au site de Jean Forteroche.
 
-            // Veuillez maintenant valider votre addresse mail pour utiliser votre compte 
-            // en cliquant sur ce lien : 
-            //     <a href="https://projet4.vincentdurufle.com/verify/?email=' . $user->email() . '&token=' . $user->token() . '">Activez votre compte</a>
-            // ';
+            Veuillez maintenant valider votre addresse mail pour utiliser votre compte 
+            en cliquant sur ce lien : 
+
+                https://projet4.vincentdurufle.com/verify/?email=' . $user->email() . '&token=' . $user->token() . '
+
+            Merci.
+            ';
+            
             $headers = 'From:noreply@projet4.vincentdurufle.com' . "\r\n";
             $headers .= 'Content-Type: text/html; charset="utf-8"' . " ";
             mail($to, $subject, $message, $headers);
@@ -103,19 +89,22 @@ class UserManager extends Manager
 
     /**
      * sets active column in user to 1
-     * @param string $_GET['email']
+     * @param object $user
      * @param int $_GET['token']
      * @return void
      */
-    public function activateUser()
+    public function activateUser(User $user)
     {
         $db = $this->dbConnect();
 
         $req = $db->prepare('SELECT email, token, active FROM users WHERE email = ? AND token = ? AND active = 0');
-        $res = $req->execute(array($_GET['email'], $_GET['token']));
+        $req->bindValue(':email', $user->email);
+        $req->bindValue(':token', $_GET['token']);
+        $res = $req->execute();
         if ($res) {
-            $update = $db->prepare('UPDATE users SET active = 1 WHERE email = ? AND token = ?');
-            $update->execute(array($_GET['email'], $_GET['token']));
+            $update = $db->prepare('UPDATE users SET active = 1 WHERE email = ?');
+            $update->bindValue(':email', $user->email());
+            $update->execute();
             header('Location: /login?success=3');
         }
         $db = null;
@@ -123,8 +112,7 @@ class UserManager extends Manager
 
     /**
      * updates token of user in db and sends email
-     * @param string $_GET['email']
-     * @param string $_GET['token']
+     * @param object $user
      * @return void
      */
     public function update(User $user)

@@ -11,26 +11,27 @@ class ChapterManager extends Manager
     {
         $db = $this->dbConnect();
         $chapters = $db->query('SELECT id, title, content, date_creation FROM chapters ORDER BY date_creation ASC');
+        $db = null;
+        
         return $chapters;
 
-        $db = null;
     }
 
     /**
    * gets all data from selected chapter with id
-   * @param int $_GET['id]
+   * @param object $chapter
    * @return array
    */
-    public function getChapter()
+    public function getChapter(Chapter $chapter)
     {
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT id, title, content, date_creation FROM chapters WHERE id = :id');
-        $req->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+        $req->bindValue(':id', $chapter->id());
         $req->execute();
         $post = $req->fetch();
+        $db = null;
 
         return $post;
-        $db = null;
     }
 
     /**

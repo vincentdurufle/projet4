@@ -19,8 +19,9 @@ class UserController extends Manager {
     {
         if (isset($_POST['submit'])) {
             if (!empty($_POST['username'] && !empty($_POST['password']))) {
-                $admin = new UserManager;
-                $req = $admin->checkUser();
+                $UserManager = new UserManager;
+                $user = new User(['username' => $_POST['username']]);
+                $req = $UserManager->checkUser($user);
                 $this->render('adminInterface', [
                     'req' => $req
                 ]);
@@ -34,11 +35,14 @@ class UserController extends Manager {
     {
         if (isset($_POST['submit'])) {
             if (!empty($_POST['username']) && !empty($_POST['password'])) {
-                $user = new UserManager;
-                $req = $user->checkUser();
-                $this->render('userInterface', [
-                    'req' => $req
-                ]);
+                $UserManager = new UserManager;
+                $user = new User(['username' => $_POST['username']]);
+                $req = $UserManager->checkUser($user);
+                if(isset($_SESSION['username'])) {
+                    $this->render('userInterface', [
+                        'req' => $req
+                    ]);
+                }
             } else {
                 header('Location: /login?err=4');
             }
@@ -58,6 +62,7 @@ class UserController extends Manager {
         session_destroy();
         header('Location: /');
     }
+    
     public function createUser()
     {
         if (isset($_POST['username']) && !empty($_POST['username']) and isset($_POST['email']) && !empty($_POST['email'] && isset($_POST['password']) && !empty($_POST['password']))) {
@@ -74,12 +79,12 @@ class UserController extends Manager {
     public function updatePassword()
     {
         if(isset($_POST['email'])) {
-            $req = new User([
+            $user = new User([
                 'email' => $_POST['email'],
                 'token' => 16
             ]);
             $email = new UserManager();
-            $email->update($req);
+            $email->update($user);
         } else {
             header('Location: /password?err=1');
         }
@@ -105,8 +110,9 @@ class UserController extends Manager {
     }
     public function verifyUser()
     {
-        $user = new UserManager();
-        $user->activateUser();
+        $user = new User(['email' => $_GET['email']]);
+        $UserManager = new UserManager();
+        $UserManager->activateUser($user);
     }
     public function addImagePage()
     {

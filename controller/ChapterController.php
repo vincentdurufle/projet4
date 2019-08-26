@@ -6,8 +6,8 @@ class ChapterController extends Manager
 {
     public function showChaptersHome()
     {
-        $chapter = new ChapterManager();
-        $req = $chapter->getChapters();
+        $ChapterManager = new ChapterManager();
+        $req = $ChapterManager->getChapters();
 
         $this->render('home', [
             'chapters' => $req
@@ -16,8 +16,8 @@ class ChapterController extends Manager
     
     public function showChapters()
     {
-        $chapter = new ChapterManager();
-        $req = $chapter->getChapters();
+        $ChapterManager = new ChapterManager();
+        $req = $ChapterManager->getChapters();
 
         $this->render('chaptersView', [
             'chapters' => $req
@@ -27,10 +27,13 @@ class ChapterController extends Manager
     public function showChapter()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $req =  new ChapterManager();
-            $chapter = $req->getChapter();
+            $Chapter = new Chapter([
+                'id' => $_GET['id']
+            ]);
+            $ChapterManager =  new ChapterManager();
+            $req = $ChapterManager->getChapter($Chapter);
             $this->render('updateChapterView', [
-                'chapter' => $chapter
+                'chapter' => $req
             ]);
         }
     }
@@ -48,15 +51,18 @@ class ChapterController extends Manager
     public function post()
     {
         if (isset($_GET['id']) && $_GET['id'] > 0) {
-            $chapter = new ChapterManager();
-            $post = $chapter->getChapter();
+            $Chapter = new Chapter([
+                'id' => $_GET['id']
+            ]);
+            $ChapterManager =  new ChapterManager();
+            $postChapter = $ChapterManager->getChapter($Chapter);
 
-            $req = new CommentManager();
-            $comments = $req->getComments();
+            $CommentManager = new CommentManager();
+            $postComments = $CommentManager->getComments($Chapter);
 
             $this->render('chapterView', [
-                'post' => $post,
-                'comments' => $comments
+                'post' => $postChapter,
+                'comments' => $postComments
             ]);
         }
     }

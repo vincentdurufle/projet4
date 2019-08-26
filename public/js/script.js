@@ -1,7 +1,11 @@
 if (document.URL.includes('/addChapter')) {
-    var editor = new FroalaEditor('#editor');
+    var editor = new FroalaEditor('#editor', {
+        attribution: false
+    });
 } else if (document.URL.includes('/updateChapter/?id')) {
-    var editor = new FroalaEditor('#editor');
+    var editor = new FroalaEditor('#editor', {
+        attribution: false
+    });
 }
 if (document.URL.includes('/updateChapter' || '/moderate')) {
     const deleteButtons = Array.from(document.querySelectorAll('.delete'));
@@ -16,7 +20,7 @@ if (document.URL.includes('/updateChapter' || '/moderate')) {
 }
 
 function error(message, nmb) {
-    if(document.URL.includes(`err=${nmb}`)) {
+    if (document.URL.includes(`err=${nmb}`)) {
         new Noty({
             type: 'error',
             text: message,
@@ -26,7 +30,7 @@ function error(message, nmb) {
 }
 
 function success(message, nmb) {
-    if(document.URL.includes(`success=${nmb}`)) {
+    if (document.URL.includes(`success=${nmb}`)) {
         new Noty({
             type: 'success',
             text: message,
@@ -51,14 +55,17 @@ function toggle() {
         menu.classList.remove('fa-bars');
         menu.classList.add('fa-times');
         document.querySelector('.menu-list-container').style.display = 'flex';
-        document.querySelector('.menu div h2').style.display = 'none';
+        menuH2.classList.add('animationLeftOut');
     } else {
-        document.querySelector('.menu-list-container').style.display = 'none';
-        document.querySelector('.menu div h2').style.display = 'flex';
         menu.classList.add('fa-bars');
+        document.querySelector('.menu-list-container').style.display = 'none';
         menu.classList.remove('fa-times');
+        menuH2.classList.remove('animationLeftOut');
     }
 }
 
 const menu = document.querySelector('.fa-bars');
+const menuH2 = document.querySelector('.menu div h2');
 menu.addEventListener('click', toggle);
+
+

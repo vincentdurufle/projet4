@@ -4,14 +4,14 @@ class CommentManager extends Manager
 {
     /**
      * gets all data from comments column in db
-     *@param int $_GET['id']
+     *@param object $chapter
      * @return array
      */
-    public function getComments()
+    public function getComments(Chapter $chapter)
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('SELECT id, name, content, date_creation, img FROM comments WHERE chapter_id = :id ORDER BY date_creation DESC');
-        $comments->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+        $comments->bindValue(':id', $chapter->id());
         $comments->execute();
 
         return $comments;
@@ -20,14 +20,14 @@ class CommentManager extends Manager
 
     /**
      * gets all comments from name column in db
-     * @param string $_GET['username']
+     * @param object $comment
      * @return array
      */
-    public function getCommentsUser()
+    public function getCommentsUser(Comment $comment)
     {
         $db = $this->dbConnect();
         $comments = $db->prepare('SELECT id, name, content, date_creation FROM comments WHERE name = :name ORDER BY date_creation DESC');
-        $comments->bindValue(':name', $_SESSION['username'], PDO::PARAM_STR);
+        $comments->bindValue(':name', $comment->name());
         $comments->execute();
 
         return $comments;
@@ -70,30 +70,30 @@ class CommentManager extends Manager
 
     /**
      * delete comment in db with id
-     * @param int $_GET['id']
+     * @param object $comment
      * @return void
      */
-    public function delete()
+    public function delete(Comment $comment)
     {
         $db = $this->dbConnect();
 
-        $deleteChapter = $db->prepare('DELETE FROM comments WHERE id = :id');
-        $deleteChapter->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
-        $deleteChapter->execute();
+        $delete = $db->prepare('DELETE FROM comments WHERE id = :id');
+        $delete->bindValue(':id', $comment->id());
+        $delete->execute();
         $db = null;
     }
 
     /**
      * sets report=0 in db with id
-     * @param int $_GET['id']
+     * @param object $comment
      * @return void
      */
-    public function report()
+    public function report(Comment $comment)
     {
         $db = $this->dbConnect();
 
         $req = $db->prepare('UPDATE comments SET report = 1 WHERE id = :id');
-        $req->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+        $req->bindValue(':id', $comment->id());
         $req->execute();
         $db = null;
         header('Location: /chapitre/?id=' . $_GET['chapterid'] . '');

@@ -1,5 +1,5 @@
 <?php ob_start() ?>
-<section class="chapters-container" id="chapter">
+<section class="chapters-containers" id="chapter">
     <div class="chapter">
         <div class="title">
             <h2> <?= htmlspecialchars($post['title']) ?></h2>

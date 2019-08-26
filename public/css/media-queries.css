@@ -8,6 +8,7 @@
         background-color: rgba(0, 0, 0, 0.5);
         position: fixed;
     }
+
     .menu ul {
         height: 100%;
         position: relative;
@@ -18,19 +19,21 @@
     .menu-list-container {
         display: none;
         -webkit-box-pack: space-evenly;
-            -ms-flex-pack: space-evenly;
-                justify-content: space-evenly;   
-        -webkit-box-align: center;   
-            -ms-flex-align: center;   
-                align-items: center;
+        -ms-flex-pack: space-evenly;
+        justify-content: space-evenly;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
         width: 100%;
+        z-index: 500;
     }
+
     .menu-list-container li {
         margin-top: 35px;
         text-align: center;
         -webkit-box-flex: unset;
-            -ms-flex: unset;
-                flex: unset;
+        -ms-flex: unset;
+        flex: unset;
         font-weight: bold;
     }
 
@@ -40,17 +43,18 @@
 
     .menu div:first-child {
         -webkit-box-flex: unset;
-            -ms-flex: unset;
-                flex: unset;
-        
+        -ms-flex: unset;
+        flex: unset;
+
     }
+
     .menu i {
         display: block;
         cursor: pointer;
         font-size: 150%;
-        
+
     }
-    
+
     .fa-times {
         top: 15%;
         cursor: pointer;
@@ -61,7 +65,9 @@
     .header h1 {
         text-align: center;
         margin-top: 20vh;
+        font-size: 215%;
     }
+
     .fa-book {
         margin: 5vh 0;
     }
@@ -73,7 +79,7 @@
     .comments {
         width: 80%;
         margin: 5% 5%;
-        
+
     }
 
     .menu-before {
@@ -83,8 +89,8 @@
     .login-container {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
     }
 
     .interface {
@@ -99,15 +105,23 @@
         display: -ms-flexbox;
         display: flex;
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
     }
 
     .editor-container form {
         width: 90%;
     }
-
+    .animationLeftOut {
+        transform: translateX(-500px);
+        transition: 0.5s ease-in-out;
+        position: absolute;
+        top: 40%;
+        left: 0%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    
 }

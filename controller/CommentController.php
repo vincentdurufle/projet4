@@ -1,16 +1,17 @@
 <?php
 
-class CommentController extends Manager{
+class CommentController extends Manager
+{
     public function addComment()
     {
-        if(isset($_SESSION['username']) && $_GET['id'] > 0) {
+        if (isset($_SESSION['username']) && $_GET['id'] > 0) {
             $req = new Comment([
                 'chapter_id' => $_GET['id'],
                 'content' => $_POST['editor_content'],
                 'name' => $_SESSION['username'],
-                'img' => $_SESSION['img']
+                'img' => $_SESSION['img'],
             ]);
-            
+
             $comment = new CommentManager();
             $comment->add($req);
         }
@@ -27,31 +28,35 @@ class CommentController extends Manager{
     }
     public function deleteComment()
     {
-        $req = new CommentManager();
-        $req->delete();
+        $CommentManager = new CommentManager();
+        $Comment = new Comment(['id' => $_GET['id']]);
+        $CommentManager->delete($Comment);
         header('Location: /moderate');
     }
     public function reportComment()
     {
-        if(isset($_SESSION['username']) && $_GET['id'] > 0) {
-            $report = new CommentManager();
-            $report->report();
+        if (isset($_SESSION['username']) && $_GET['id'] > 0) {
+            $CommentManager = new CommentManager();
+            $Comment = new Comment(['id' => $_GET['id']]);
+            $CommentManager->report($Comment);
         }
-        
+
     }
-    
-    public function showComments() {
+
+    public function showComments()
+    {
         $req = new CommentManager();
-        if($_SESSION['username'] == 'admin') {
+        $Comment = new Comment(['name' => $_SESSION['username']]);
+        if ($_SESSION['username'] == 'admin') {
             list($comments, $reports) = $req->getCommentsAdmin();
             $this->render('commentsViewAdmin', [
                 'comments' => $comments,
-                'reports' => $reports
+                'reports' => $reports,
             ]);
         } else {
-            $comments = $req->getCommentsUser();
+            $comments = $req->getCommentsUser($Comment);
             $this->render('commentsViewUser', [
-                'comments' => $comments
+                'comments' => $comments,
             ]);
         }
     }
