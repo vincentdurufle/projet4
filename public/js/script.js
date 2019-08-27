@@ -67,5 +67,3 @@ function toggle() {
 const menu = document.querySelector('.fa-bars');
 const menuH2 = document.querySelector('.menu div h2');
 menu.addEventListener('click', toggle);
-
-

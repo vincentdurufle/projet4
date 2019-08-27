@@ -114,6 +114,7 @@ class UserController extends Manager {
         $UserManager = new UserManager();
         $UserManager->activateUser($user);
     }
+    
     public function addImagePage()
     {
         $this->render('addImageView', []);

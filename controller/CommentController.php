@@ -39,6 +39,8 @@ class CommentController extends Manager
             $CommentManager = new CommentManager();
             $Comment = new Comment(['id' => $_GET['id']]);
             $CommentManager->report($Comment);
+        } else {
+            header('Location: /login');
         }
 
     }

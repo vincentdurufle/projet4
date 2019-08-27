@@ -1,6 +1,6 @@
 <?php ob_start() ?>
 
-<section class="chapters-container" id="chapter">
+<section class="chapters-containers" id="chapter">
         <?php
         while ($data = $chapters->fetch()) {
             

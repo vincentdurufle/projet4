@@ -15,7 +15,6 @@ $script = '<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froa
 
 </section>
 
-
 <?php $content = ob_get_clean() ?>
 
 <?php require('./view/template.php') ?>

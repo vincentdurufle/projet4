@@ -96,13 +96,13 @@ class UserManager extends Manager
     public function activateUser(User $user)
     {
         $db = $this->dbConnect();
-
-        $req = $db->prepare('SELECT email, token, active FROM users WHERE email = ? AND token = ? AND active = 0');
-        $req->bindValue(':email', $user->email);
+        
+        $req = $db->prepare('SELECT email, token, active FROM users WHERE email = :email AND token = :token AND active = 0');
+        $req->bindValue(':email', $user->email());
         $req->bindValue(':token', $_GET['token']);
         $res = $req->execute();
         if ($res) {
-            $update = $db->prepare('UPDATE users SET active = 1 WHERE email = ?');
+            $update = $db->prepare('UPDATE users SET active = 1 WHERE email = :email');
             $update->bindValue(':email', $user->email());
             $update->execute();
             header('Location: /login?success=3');

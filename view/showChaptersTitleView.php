@@ -6,7 +6,7 @@ if (!isset($_SESSION['username'])) {
 
 <?php ob_start() ?>
 
-<section class="chapter-containers">
+<section class="chapters-containers">
     <h1 class="title-container">Veuillez séléctionner un chapitre pour le mettre à jour.</h1>
     <div class="chapter">
 

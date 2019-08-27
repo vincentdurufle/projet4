@@ -261,6 +261,7 @@ nav a:visited {
             align-items: center;
     border-bottom: 1px solid lightgray;
     margin-bottom: 15px;
+    color: black;
 }
 .comment-content p {
     margin: 5px;

@@ -8,7 +8,8 @@
  */
 
 class Comment
-{
+{   
+    private $id;
     private $chapter_id;
     private $name;
     private $content;
@@ -37,14 +38,24 @@ class Comment
         }
     }
     /**
-     * sets id
+     * sets $chapter_id
      *
      * @param int $chapter_id
      * @return void
      */
     public function setChapter_Id($chapter_id)
     {
-        $this->chapter_id = $chapter_id;
+        $this->chapter_id =(int) $chapter_id;
+    }
+    /**
+     * sets $chapter_id
+     *
+     * @param int $id
+     * @return void
+     */
+    public function setId($id)
+    {
+        $this->id = (int) $id;
     }
     /**
      *
@@ -78,6 +89,11 @@ class Comment
     public function chapter_id()
     {
         return $this->chapter_id;
+    }
+
+    public function id()
+    {
+        return $this->id;
     }
 
     public function name()
